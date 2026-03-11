@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inc0gnito — 프로젝트 현황판</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#07090f; --s0:#0c1018; --s1:#111827; --s2:#1a2535; --border:#1e2d42;
+  --a:#22d3ee; --b:#a78bfa; --c:#34d399;
+  --done:#34d399; --wip:#fbbf24; --block:#f87171; --pend:#475569;
+  --text:#e2e8f0; --muted:#64748b;
+  --mono:'DM Mono',monospace; --sans:'Noto Sans KR',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);background:var(--bg);color:var(--text);min-height:100vh;
+  background-image:
+    radial-gradient(ellipse 70% 50% at 90% 0%,rgba(34,211,238,.05) 0%,transparent 55%),
+    radial-gradient(ellipse 50% 40% at 5% 90%,rgba(167,139,250,.05) 0%,transparent 55%);
+}
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+
+/* ── HEADER ── */
+header{border-bottom:1px solid var(--border);padding:28px 0 20px}
+.hd{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px}
+.proj-tag{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.proj-title{font-size:22px;font-weight:700;letter-spacing:-.02em;line-height:1.2}
+.proj-title em{font-style:normal;color:var(--a)}
+.hd-meta{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.chip{font-family:var(--mono);font-size:11px;background:var(--s1);border:1px solid var(--border);padding:5px 12px;border-radius:6px;color:var(--muted)}
+.chip.live{border-color:var(--done);color:var(--done)}
+
+/* ── NAV ── */
+.nav{display:flex;gap:4px;border-bottom:1px solid var(--border);padding:16px 0 0;overflow-x:auto}
+.nb{font-family:var(--mono);font-size:11px;letter-spacing:.05em;padding:8px 16px;background:none;border:none;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;transition:color .15s}
+.nb:hover{color:var(--text)}
+.nb.on{color:var(--a);border-bottom-color:var(--a)}
+
+/* ── TAB PANELS ── */
+.tp{display:none;padding:32px 0}
+.tp.on{display:block}
+
+/* ── PANEL ── */
+.panel{background:var(--s0);border:1px solid var(--border);border-radius:14px;padding:22px 24px}
+.ptitle{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+
+/* ── STAT GRID ── */
+.sg{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px}
+@media(max-width:900px){.sg{grid-template-columns:repeat(2,1fr)}}
+.sc{background:var(--s0);border:1px solid var(--border);border-radius:12px;padding:18px 20px;transition:border-color .3s}
+.sc.flash{border-color:var(--a);animation:flashBorder .6s ease forwards}
+@keyframes flashBorder{0%{border-color:var(--a);box-shadow:0 0 12px rgba(34,211,238,.3)}100%{border-color:var(--border);box-shadow:none}}
+.slb{font-size:11px;color:var(--muted);margin-bottom:8px}
+.sv{font-size:28px;font-weight:700;font-family:var(--mono);line-height:1;transition:color .3s}
+.ssub{font-size:11px;color:var(--muted);margin-top:4px}
+
+/* ── OVERVIEW GRID ── */
+.og{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+@media(max-width:700px){.og{grid-template-columns:1fr}}
+
+/* ── PROGRESS ── */
+.pr{margin-bottom:14px}
+.pl{display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px}
+.pl span{color:var(--muted)}
+.pl strong{font-family:var(--mono);transition:color .3s}
+.pb{height:6px;background:var(--s2);border-radius:99px;overflow:hidden}
+.pf{height:100%;border-radius:99px;transition:width .5s cubic-bezier(.4,0,.2,1)}
+
+/* ── MILESTONE ── */
+.ml{display:flex;flex-direction:column;gap:10px}
+.mi{display:flex;align-items:center;gap:12px;font-size:13px}
+.md{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:10px;flex-shrink:0}
+.md-done{background:rgba(52,211,153,.12);color:var(--done)}
+.md-cur{background:rgba(251,191,36,.12);color:var(--wip);border:1px solid rgba(251,191,36,.3)}
+.md-next{background:var(--s1);color:var(--muted)}
+.mi-info{flex:1}
+.mi-name{font-size:13px;font-weight:500}
+.mi-date{font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:1px}
+.mb{font-family:var(--mono);font-size:10px;padding:3px 8px;border-radius:99px}
+.mb-done{background:rgba(52,211,153,.1);color:var(--done)}
+.mb-cur{background:rgba(251,191,36,.1);color:var(--wip)}
+.mb-next{background:var(--s1);color:var(--muted)}
+
+/* ── TEAM GRID ── */
+.tg{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:900px){.tg{grid-template-columns:1fr 1fr}}
+@media(max-width:580px){.tg{grid-template-columns:1fr}}
+.mc{background:var(--s0);border:1px solid var(--border);border-radius:16px;padding:24px;position:relative;overflow:hidden;transition:transform .2s,border-color .2s}
+.mc:hover{transform:translateY(-3px)}
+.mc::after{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.mc-a::after{background:linear-gradient(90deg,var(--a),transparent)}
+.mc-b::after{background:linear-gradient(90deg,var(--b),transparent)}
+.mc-c::after{background:linear-gradient(90deg,var(--c),transparent)}
+.mc-a:hover{border-color:rgba(34,211,238,.25)}
+.mc-b:hover{border-color:rgba(167,139,250,.25)}
+.mc-c:hover{border-color:rgba(52,211,153,.25)}
+.mc-hd{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.av{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:500;font-size:16px;flex-shrink:0}
+.mc-a .av{background:rgba(34,211,238,.1);color:var(--a)}
+.mc-b .av{background:rgba(167,139,250,.1);color:var(--b)}
+.mc-c .av{background:rgba(52,211,153,.1);color:var(--c)}
+.mc-name{font-size:15px;font-weight:700}
+.mc-role{font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:2px;letter-spacing:.04em}
+.tsl{font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin:14px 0 8px}
+
+/* ── TASK ITEM ── */
+.ti{display:flex;gap:8px;padding:7px 9px;border-radius:7px;margin-bottom:4px;font-size:12.5px;line-height:1.45;align-items:flex-start;transition:background .2s}
+.td{width:8px;height:8px;border-radius:50%;margin-top:4px;flex-shrink:0;cursor:pointer;transition:box-shadow .2s,transform .15s}
+.td:hover{transform:scale(1.4)}
+/* 상태별 점 색 */
+.s-done .td{background:var(--done);box-shadow:0 0 5px var(--done)}
+.s-wip  .td{background:var(--wip);box-shadow:0 0 5px var(--wip)}
+.s-pend .td{background:var(--pend)}
+.s-block .td{background:var(--block);box-shadow:0 0 5px var(--block)}
+/* 상태별 행 배경 */
+.s-done {opacity:.6}
+.s-done .tt{text-decoration:line-through;color:var(--muted)}
+.s-block{background:rgba(248,113,113,.06)}
+.s-wip  {background:rgba(251,191,36,.05)}
+
+/* ── MEMBER STATUS BADGE ── */
+.msb{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:10px;padding:4px 10px;border-radius:99px;margin-top:16px;cursor:pointer;transition:opacity .15s;user-select:none}
+.msb:hover{opacity:.8}
+.msb-dot{width:5px;height:5px;border-radius:50%;background:currentColor}
+.msb-done {background:rgba(52,211,153,.1);color:var(--done)}
+.msb-wip  {background:rgba(251,191,36,.1);color:var(--wip)}
+.msb-block{background:rgba(248,113,113,.1);color:var(--block)}
+
+/* ── WBS TABLE ── */
+.wt{width:100%;border-collapse:collapse;font-size:13px}
+.wt th{text-align:left;padding:10px 14px;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border);white-space:nowrap}
+.wt td{padding:11px 14px;border-bottom:1px solid rgba(30,45,66,.6);vertical-align:top}
+.wt tr:hover td{background:rgba(255,255,255,.015)}
+.wn{font-family:var(--mono);font-size:11px;color:var(--muted);white-space:nowrap}
+.wcur td{background:rgba(251,191,36,.04)!important}
+.wcur .wn{color:var(--wip)}
+.phc{font-size:11px;padding:3px 8px;border-radius:5px;white-space:nowrap;display:inline-block}
+.ph1{background:rgba(34,211,238,.08);color:var(--a)}
+.ph2{background:rgba(167,139,250,.08);color:var(--b)}
+.ph3{background:rgba(52,211,153,.08);color:var(--c)}
+.pills{display:flex;gap:4px;flex-wrap:wrap}
+.pill{font-family:var(--mono);font-size:10px;padding:2px 7px;border-radius:99px}
+.pa{background:rgba(34,211,238,.1);color:var(--a)}
+.pb2{background:rgba(167,139,250,.1);color:var(--b)}
+.pc{background:rgba(52,211,153,.1);color:var(--c)}
+/* WBS 상태 배지 - 클릭 가능 */
+.rs{font-family:var(--mono);font-size:10px;padding:4px 10px;border-radius:99px;white-space:nowrap;cursor:pointer;user-select:none;transition:opacity .15s}
+.rs:hover{opacity:.8}
+.rs-done{background:rgba(52,211,153,.1);color:var(--done)}
+.rs-cur {background:rgba(251,191,36,.1);color:var(--wip)}
+.rs-pend{background:var(--s1);color:var(--muted)}
+@media(max-width:640px){.wt th:nth-child(4),.wt td:nth-child(4){display:none}}
+
+/* ── DEPS ── */
+.dl{display:flex;flex-direction:column;gap:10px}
+.di{display:flex;align-items:center;gap:12px;background:var(--s0);border:1px solid var(--border);border-radius:10px;padding:14px 18px;flex-wrap:wrap}
+.dc{font-family:var(--mono);font-size:11px;padding:4px 12px;border-radius:6px;min-width:68px;text-align:center;white-space:nowrap}
+.dca{background:rgba(34,211,238,.1);color:var(--a)}
+.dcb{background:rgba(167,139,250,.1);color:var(--b)}
+.dcc{background:rgba(52,211,153,.1);color:var(--c)}
+.darr{color:var(--muted);font-size:14px}
+.dd{flex:1;font-size:13px;min-width:180px}
+.dd small{display:block;font-size:11px;color:var(--muted);margin-top:2px;font-family:var(--mono)}
+.dt{font-family:var(--mono);font-size:10px;padding:4px 10px;border-radius:99px;white-space:nowrap}
+.dt-w{background:rgba(248,113,113,.1);color:var(--block)}
+.dt-ok{background:rgba(52,211,153,.1);color:var(--done)}
+
+/* ── EDIT BAR ── */
+.eb{display:flex;align-items:center;gap:10px;background:var(--s1);border:1px solid var(--border);border-radius:10px;padding:10px 16px;margin-bottom:20px;flex-wrap:wrap}
+.eb span{font-size:12px;color:var(--muted);flex:1}
+.etb{font-family:var(--mono);font-size:11px;padding:6px 14px;border-radius:6px;border:1px solid var(--border);background:var(--s0);color:var(--text);cursor:pointer;transition:border-color .15s}
+.etb:hover{border-color:var(--a);color:var(--a)}
+.etb.on{border-color:var(--wip);color:var(--wip);background:rgba(251,191,36,.06)}
+[contenteditable="true"]{outline:none;border-bottom:1px dashed rgba(251,191,36,.4)}
+[contenteditable="true"]:focus{background:rgba(251,191,36,.05);border-radius:3px}
+
+/* ── LEGEND ── */
+.legend{display:flex;gap:18px;flex-wrap:wrap;padding:16px 0 4px;border-top:1px solid var(--border);margin-top:24px}
+.li2{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted)}
+.ld{width:7px;height:7px;border-radius:50%}
+
+/* ── BLOCKER PANEL ── */
+.brow{display:flex;align-items:center;gap:10px;font-size:13px;padding:8px 12px;background:rgba(248,113,113,.04);border-radius:8px;flex-wrap:wrap;margin-bottom:8px}
+
+@media(max-width:480px){.proj-title{font-size:16px}.og{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- ══ HEADER ══ -->
+<div class="wrap">
+  <header>
+    <div class="hd">
+      <div>
+        <div class="proj-tag">Inc0gnito Project · VoIP SIM Box Detection System</div>
+        <h1 class="proj-title">물리적 계층 아티팩트 기반 <em>차세대 SIM Box 탐지</em></h1>
+      </div>
+      <div class="hd-meta">
+        <div class="chip live">● LIVE</div>
+        <div class="chip" id="hd-date">—</div>
+        <div class="chip" id="hd-week">—</div>
+        <div class="chip">D-<span id="hd-dday">?</span></div>
+      </div>
+    </div>
+  </header>
+  <nav class="nav">
+    <button class="nb on"  onclick="switchTab('ov',this)">개요</button>
+    <button class="nb"     onclick="switchTab('team',this)">팀원 현황</button>
+    <button class="nb"     onclick="switchTab('wbs',this)">WBS 일정</button>
+    <button class="nb"     onclick="switchTab('deps',this)">의존 관계</button>
+  </nav>
+</div>
+
+<!-- ══════════════════════════════
+     TAB 1 : 개요
+══════════════════════════════ -->
+<div class="wrap">
+<div id="tab-ov" class="tp on">
+
+  <div class="eb">
+    <span>● 팀원 현황 · WBS 탭에서 상태를 변경하면 개요가 자동 반영돼요</span>
+    <button class="etb on" onclick="switchTab('team', document.querySelectorAll('.nb')[1])">팀원 현황 바로가기 →</button>
+  </div>
+
+  <!-- 통계 카드 -->
+  <div class="sg">
+    <div class="sc" id="sc-pct">
+      <div class="slb">전체 진행률</div>
+      <div class="sv" id="ov-pct" style="color:var(--a)">—</div>
+      <div class="ssub" id="ov-week">계산 중…</div>
+    </div>
+    <div class="sc" id="sc-done">
+      <div class="slb">완료 주차</div>
+      <div class="sv" id="ov-done" style="color:var(--done)">—</div>
+      <div class="ssub" id="ov-phase">—</div>
+    </div>
+    <div class="sc">
+      <div class="slb">다음 리비전</div>
+      <div class="sv" style="color:var(--wip);font-size:17px;padding-top:4px">2차</div>
+      <div class="ssub">2/23 ~ 2/27</div>
+    </div>
+    <div class="sc">
+      <div class="slb">최종 마감</div>
+      <div class="sv" style="color:var(--block);font-size:17px;padding-top:4px">4/26</div>
+      <div class="ssub">컨퍼런스 5/9</div>
+    </div>
+  </div>
+
+  <div class="og">
+    <!-- Phase별 진행률 -->
+    <div class="panel">
+      <div class="ptitle">단계별 진행률 (WBS 상태 기반 자동 계산)</div>
+      <div class="pr">
+        <div class="pl"><span>Phase 1 · 기획 및 데이터 생성 (1~3주)</span><strong id="ph1-pct">—</strong></div>
+        <div class="pb"><div class="pf" id="ph1-bar" style="background:linear-gradient(90deg,var(--b),var(--a))"></div></div>
+      </div>
+      <div class="pr">
+        <div class="pl"><span>Phase 2 · 알고리즘 개발 및 모델링 (4~7주)</span><strong id="ph2-pct">—</strong></div>
+        <div class="pb"><div class="pf" id="ph2-bar" style="background:var(--b)"></div></div>
+      </div>
+      <div class="pr">
+        <div class="pl"><span>Phase 3 · 시스템 통합 및 완료 (8~10주)</span><strong id="ph3-pct">—</strong></div>
+        <div class="pb"><div class="pf" id="ph3-bar" style="background:var(--c)"></div></div>
+      </div>
+      <div class="pr" style="margin-top:18px;padding-top:14px;border-top:1px solid var(--border)">
+        <div class="pl"><span>전체 (Inc0gnito 16주 기준)</span><strong id="ov-bar-pct">—</strong></div>
+        <div class="pb" style="height:8px"><div class="pf" id="ov-bar" style="background:linear-gradient(90deg,var(--b),var(--a))"></div></div>
+      </div>
+    </div>
+
+    <!-- 마일스톤 -->
+    <div class="panel">
+      <div class="ptitle">주요 마일스톤</div>
+      <div class="ml">
+        <div class="mi"><div class="md md-done">✓</div><div class="mi-info"><div class="mi-name">1차 리비전</div><div class="mi-date">1/14 ~ 1/16</div></div><span class="mb mb-done">완료</span></div>
+        <div class="mi"><div class="md md-done">✓</div><div class="mi-info"><div class="mi-name">2차 리비전</div><div class="mi-date">2/23 ~ 2/27</div></div><span class="mb mb-done">완료</span></div>
+        <div class="mi"><div class="md md-cur">●</div><div class="mi-info"><div class="mi-name">3차 리비전</div><div class="mi-date">3/30 ~ 4/3</div></div><span class="mb mb-cur">준비중</span></div>
+        <div class="mi"><div class="md md-next">F</div><div class="mi-info"><div class="mi-name">최종 마감</div><div class="mi-date">4/26 (일)</div></div><span class="mb mb-next">예정</span></div>
+        <div class="mi"><div class="md md-next">C</div><div class="mi-info"><div class="mi-name">Inc0gnito 컨퍼런스</div><div class="mi-date">5/9 (토)</div></div><span class="mb mb-next">예정</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 블로커 -->
+  <div class="panel" id="blocker-panel" style="border-color:rgba(248,113,113,.2)">
+    <div class="ptitle" style="color:var(--block)">⛔ 현재 블로커 <span id="blocker-count" style="font-size:10px;background:rgba(248,113,113,.15);padding:2px 7px;border-radius:99px;margin-left:6px">0</span></div>
+    <div id="blocker-list"></div>
+    <div id="blocker-empty" style="font-size:13px;color:var(--done);display:none">✅ 현재 블로커 없음 — 순항 중!</div>
+  </div>
+
+</div>
+</div>
+
+<!-- ══════════════════════════════
+     TAB 2 : 팀원 현황
+══════════════════════════════ -->
+<div class="wrap">
+<div id="tab-team" class="tp">
+  <div class="eb">
+    <span>● 점 클릭 → 상태 변경 &nbsp;|&nbsp; 배지 클릭 → 멤버 전체 상태 변경 &nbsp;|&nbsp; 변경사항은 자동 저장·개요에 즉시 반영</span>
+    <button class="etb" id="etb-team" onclick="toggleEdit()">✏️ 텍스트 편집</button>
+  </div>
+  <div class="tg">
+
+    <!-- A: 이안 -->
+    <div class="mc mc-a">
+      <div class="mc-hd"><div class="av">A</div><div><div class="mc-name">이안</div><div class="mc-role">네트워크 · 데이터 엔지니어</div></div></div>
+      <div class="tsl">완료</div>
+      <div class="ti s-done" data-id="a1" data-member="A"><div class="td" title="클릭해서 상태 변경"></div><div class="tt" data-ed="a1">리눅스 VM (Ubuntu) 환경 셋업</div></div>
+      <div class="ti s-done" data-id="a2" data-member="A"><div class="td"></div><div class="tt" data-ed="a2">WSL 2 도입 — 패킷 미전송 이슈 해결</div></div>
+      <div class="ti s-done" data-id="a3" data-member="A"><div class="td"></div><div class="tt" data-ed="a3">SIPp 시도 → Python Scapy 직접 생성으로 전환 확정</div></div>
+      <div class="ti s-done" data-id="a4" data-member="A"><div class="td"></div><div class="tt" data-ed="a4">Asterisk → SIPp 방식으로 변경 확정</div></div>
+      <div class="tsl">진행중 / 예정</div>
+      <div class="ti s-pend"  data-id="a5" data-member="A"><div class="td"></div><div class="tt" data-ed="a5">tc-netem 시나리오 다양화 검토 (현재 Python 생성으로 대체됨)</div></div>
+      <div class="ti s-pend" data-id="a6" data-member="A"><div class="td"></div><div class="tt" data-ed="a6">tc-netem 시나리오 다양화 (패킷 손실, 고지터)</div></div>
+      <div class="ti s-done" data-id="a7" data-member="A"><div class="td"></div><div class="tt" data-ed="a7">sessions.csv 8,000세션 (normal 4,000 / fraud 4,000) 완성 — 현서 주도</div></div>
+      <div class="ti s-done" data-id="a8" data-member="A"><div class="td"></div><div class="tt" data-ed="a8">학습 데이터셋 레이블링 및 품질 검증 완료</div></div>
+      <div class="msb msb-done" data-mc="A" data-id="mc-a"><div class="msb-dot"></div><span>데이터 완료</span></div>
+    </div>
+
+    <!-- B: 광준 -->
+    <div class="mc mc-b">
+      <div class="mc-hd"><div class="av">B</div><div><div class="mc-name">광준</div><div class="mc-role">AI 모델러 · 분석가</div></div></div>
+      <div class="tsl">완료</div>
+      <div class="ti s-done" data-id="b1" data-member="B"><div class="td"></div><div class="tt" data-ed="b1">데이터 파이프라인 구조 정의 (Raw/Processed)</div></div>
+      <div class="ti s-done" data-id="b2" data-member="B"><div class="td"></div><div class="tt" data-ed="b2">더미 데이터 기반 ML 코드 구조 설계</div></div>
+      <div class="ti s-done" data-id="b3" data-member="B"><div class="td"></div><div class="tt" data-ed="b3">RFC 3550 지터 계산 로직 연구</div></div>
+      <div class="ti s-done" data-id="b4" data-member="B"><div class="td"></div><div class="tt" data-ed="b4">앙상블 모델 (RF + Isolation Forest) 채택 확정</div></div>
+      <div class="tsl">진행중 / 예정</div>
+      <div class="ti s-wip"  data-id="b5" data-member="B"><div class="td"></div><div class="tt" data-ed="b5">실제 sessions.csv (8,000세션) 수령 후 Random Forest 베이스라인 학습</div></div>
+      <div class="ti s-done" data-id="b6" data-member="B"><div class="td"></div><div class="tt" data-ed="b6">Feature Engineering 초안 완성 — 지터·IAT 분산·패킷 손실률 계산 코드 (Google Colab), PCAP 일괄 업로드·자동 라벨링·CSV 출력</div></div>
+      <div class="ti s-pend" data-id="b7" data-member="B"><div class="td"></div><div class="tt" data-ed="b7">XGBoost 도입 (SMOTE 불필요 — 데이터 이미 4:4 균형)</div></div>
+      <div class="ti s-pend" data-id="b8" data-member="B"><div class="td"></div><div class="tt" data-ed="b8">Precision / Recall / F1 성능 평가 보고서</div></div>
+      <div class="ti s-pend" data-id="b9" data-member="B"><div class="td"></div><div class="tt" data-ed="b9"><code style="font-family:var(--mono);font-size:10px;background:var(--s2);padding:1px 4px;border-radius:3px">model.pkl</code> → src/model/ 저장 후 현서에게 전달</div></div>
+      <div class="msb msb-wip" data-mc="B" data-id="mc-b"><div class="msb-dot"></div><span>진행중</span></div>
+    </div>
+
+    <!-- C: 현서 -->
+    <div class="mc mc-c">
+      <div class="mc-hd"><div class="av">C</div><div><div class="mc-name">현서</div><div class="mc-role">소프트웨어 · 웹 개발자</div></div></div>
+      <div class="tsl">완료 (3주차)</div>
+      <div class="ti s-done" data-id="c1" data-member="C"><div class="td"></div><div class="tt" data-ed="c1">Flask 서버 + SQLite DB 구축 및 기동 확인</div></div>
+      <div class="ti s-done" data-id="c2" data-member="C"><div class="td"></div><div class="tt" data-ed="c2">REST API 5개 완성 (sessions, stats, analyze, upload-pcap)</div></div>
+      <div class="ti s-done" data-id="c3" data-member="C"><div class="td"></div><div class="tt" data-ed="c3">rtp_parser.py — RFC 3550 지터 + IAT 세션 특징 추출</div></div>
+      <div class="ti s-done" data-id="c4" data-member="C"><div class="td"></div><div class="tt" data-ed="c4">더미 데이터 100개 DB 삽입 검증 완료</div></div>
+      <div class="ti s-done" data-id="c5" data-member="C"><div class="td"></div><div class="tt" data-ed="c5">대시보드 MVP (Chart.js 지터 그래프 + PCAP 업로드)</div></div>
+      <div class="ti s-done" data-id="c6" data-member="C"><div class="td"></div><div class="tt" data-ed="c6">feature/parser 브랜치 GitHub push</div></div>
+      <div class="tsl">진행중</div>
+      <div class="ti s-wip" data-id="c7" data-member="C"><div class="td"></div><div class="tt" data-ed="c7">sessions.csv 구글 드라이브 업로드 → 광준 공유</div></div>
+      <div class="ti s-pend" data-id="c9" data-member="C"><div class="td"></div><div class="tt" data-ed="c9">README 업데이트 (Streamlit→Flask, tc-netem→Python Scapy 반영)</div></div>
+      <div class="tsl">블로커 대기</div>
+      <div class="ti s-block" data-id="c8" data-member="C" data-blocker="광준님 model.pkl → /api/analyze 연동"><div class="td"></div><div class="tt" data-ed="c8">⛔ 광준님 model.pkl → /api/analyze 연동</div></div>
+      <div class="msb msb-wip" data-mc="C" data-id="mc-c"><div class="msb-dot"></div><span>진행중</span></div>
+    </div>
+
+  </div>
+  <div class="legend">
+    <div class="li2"><div class="ld" style="background:var(--done)"></div>완료</div>
+    <div class="li2"><div class="ld" style="background:var(--wip)"></div>진행중</div>
+    <div class="li2"><div class="ld" style="background:var(--block)"></div>블로커</div>
+    <div class="li2"><div class="ld" style="background:var(--pend)"></div>예정</div>
+    <div class="li2" style="margin-left:auto">● 점 클릭 → 상태 변경 &nbsp;|&nbsp; 개요 자동 반영</div>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════
+     TAB 3 : WBS
+══════════════════════════════ -->
+<div class="wrap">
+<div id="tab-wbs" class="tp">
+  <div class="eb">
+    <span>● 상태 배지를 클릭하면 완료→진행중→예정 순으로 변경되고 개요 진행률에 즉시 반영돼요</span>
+  </div>
+  <div class="panel" style="overflow-x:auto">
+    <table class="wt">
+      <thead><tr><th>주차</th><th>기간</th><th>Phase</th><th>담당</th><th>주요 내용</th><th>상태</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="wn">1주</td><td style="font-family:var(--mono);font-size:11px;color:var(--muted)">2/1~2/7</td>
+          <td><span class="phc ph1">Phase 1</span></td>
+          <td><div class="pills"><span class="pill pa">A</span><span class="pill pb2">B</span><span class="pill pc">C</span></div></td>
+          <td>주제 확정, VM 환경 셋업, Git 레포 생성, 개발 계획서 초안</td>
+          <td><span class="rs rs-done" data-wid="w1" data-phase="1">완료</span></td>
+        </tr>
+        <tr>
+          <td class="wn">2주</td><td style="font-family:var(--mono);font-size:11px;color:var(--muted)">2/8~2/14</td>
+          <td><span class="phc ph1">Phase 1</span></td>
+          <td><div class="pills"><span class="pill pa">A</span><span class="pill pb2">B</span><span class="pill pc">C</span></div></td>
+          <td>tc-netem 시나리오 설계, SIPp 트래픽 생성, Flask MVP + SQLite 구축, PCAP 확보</td>
+          <td><span class="rs rs-done" data-wid="w2" data-phase="1">완료</span></td>
+        </tr>
+        <tr>
+          <td class="wn">3주</td><td style="font-family:var(--mono);font-size:11px;color:var(--muted)">2/15~2/21</td>
+          <td><span class="phc ph1">Phase 1</span></td>
+          <td><div class="pills"><span class="pill pc">C</span></div></td>
+          <td>rtp_parser.py 완성, 더미 데이터 생성, DB 연동 검증, API 5개, GitHub push</td>
+          <td><span class="rs rs-done" data-wid="w3" data-phase="1">완료</span></td>
+        </tr>
+        <tr>
+          <td class="wn">4주</td><td style="font-family:var(--mono);font-size:11px;color:var(--muted)">2/22~2/28</td>
+          <td><span class="phc ph2">Phase 2</span></td>
+          <td><div class="pills"><span class="pill pa">A</span><span class="pill pb2">B</span><span class="pill pc">C</span></div></td>
+          <td>Feature Engineering, Python Scapy 기반 데이터 생성 전환, sessions.csv 8,000세션 완성</td>
+          <td><span class="rs rs-done" data-wid="w4" data-phase="2">완료</span></td>
+        </tr>
+        <tr class="wcur">
+          <td class="wn">5주 ◀</td><td style="font-family:var(--mono);font-size:11px;color:var(--wip)">3/8~3/14</td>
+          <td><span class="phc ph2">Phase 2</span></td>
+          <td><div class="pills"><span class="pill pb2">B</span><span class="pill pc">C</span></div></td>
+          <td>sessions.csv → 광준 전달, Random Forest 베이스라인 학습 시작, Flask 대시보드 개발 착수</td>
+          <td><span class="rs rs-cur" data-wid="w5" data-phase="2">진행중</span></td>
+        </tr>
+        <tr>
+          <td class="wn">6주</td><td style="font-family:var(--mono);font-size:11px;color:var(--muted)">3/15~3/21</td>
+          <td><span class="phc ph2">Phase 2</span></td>
+          <td><div class="pills"><span class="pill pa">A</span><span class="pill pb2">B</span><span class="pill pc">C</span></div></td>
+          <td>XGBoost 도입, SMOTE 불균형 해결, model.pkl 서빙 테스트</td>
+          <td><span class="rs rs-pend" data-wid="w6" data-phase="2">예정</span></td>
+        </tr>
+        <tr>
+          <td class="wn">7주</td><td style="font-family:var(--mono);font-size:11px;color:var(--muted)">3/15~3/21</td>
+          <td><span class="phc ph2">Phase 2</span></td>
+          <td><div class="pills"><span class="pill pb2">B</span><span class="pill pc">C</span></div></td>
+          <td>탐지 엔진 통합, 전처리→예측 자동화 완성, 성능 평가 보고서</td>
+          <td><span class="rs rs-pend" data-wid="w7" data-phase="2">예정</span></td>
+        </tr>
+        <tr>
+          <td class="wn">8주</td><td style="font-family:var(--mono);font-size:11px;color:var(--muted)">3/22~3/28</td>
+          <td><span class="phc ph3">Phase 3</span></td>
+          <td><div class="pills"><span class="pill pb2">B</span><span class="pill pc">C</span></div></td>
+          <td>Chart.js 시각화 연동, Fraud Score 대시보드, 실시간 알림</td>
+          <td><span class="rs rs-pend" data-wid="w8" data-phase="3">예정</span></td>
+        </tr>
+        <tr>
+          <td class="wn">9주</td><td style="font-family:var(--mono);font-size:11px;color:var(--muted)">3/29~4/4</td>
+          <td><span class="phc ph3">Phase 3</span></td>
+          <td><div class="pills"><span class="pill pa">A</span><span class="pill pb2">B</span><span class="pill pc">C</span></div></td>
+          <td>전체 파이프라인 통합 테스트, 검증 — <strong>3차 리비전 (3/30~4/3)</strong></td>
+          <td><span class="rs rs-pend" data-wid="w9" data-phase="3">예정</span></td>
+        </tr>
+        <tr>
+          <td class="wn">10주</td><td style="font-family:var(--mono);font-size:11px;color:var(--muted)">4/5~4/11</td>
+          <td><span class="phc ph3">Phase 3</span></td>
+          <td><div class="pills"><span class="pill pa">A</span><span class="pill pb2">B</span><span class="pill pc">C</span></div></td>
+          <td>최종 보고서, 발표자료 제작, 시연 영상 녹화</td>
+          <td><span class="rs rs-pend" data-wid="w10" data-phase="3">예정</span></td>
+        </tr>
+        <tr>
+          <td class="wn">11~14주</td><td style="font-family:var(--mono);font-size:11px;color:var(--muted)">4/12~4/26</td>
+          <td><span class="phc" style="background:rgba(248,113,113,.08);color:var(--block)">마무리</span></td>
+          <td><div class="pills"><span class="pill pa">A</span><span class="pill pb2">B</span><span class="pill pc">C</span></div></td>
+          <td>버퍼 · 최종 마감 (4/26) · Inc0gnito 컨퍼런스 준비 (5/9)</td>
+          <td><span class="rs rs-pend" data-wid="w11" data-phase="0">예정</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════
+     TAB 4 : 의존 관계
+══════════════════════════════ -->
+<div class="wrap">
+<div id="tab-deps" class="tp">
+  <div class="dl">
+
+    <!-- dep-id: a5 (이안 RTP PCAP 재생성) 완료 시 → 자동 완료 -->
+    <div class="di" data-dep="dep-a-c">
+      <div class="dc dca">이안 A</div><div class="darr">→</div><div class="dc dcc">현서 C</div>
+      <div class="dd">
+        RTP 포함 PCAP 파일 전달
+        <small id="dep-a-c-sub">✅ Python Scapy 직접 생성으로 대체 — 블로커 해소됨</small>
+      </div>
+      <div class="dt dt-ok" id="dep-a-c-tag">✅ 해소됨</div>
+    </div>
+
+    <!-- dep-id: 현서→광준 sessions.csv 전달 -->
+    <div class="di" data-dep="dep-c-b">
+      <div class="dc dcc">현서 C</div><div class="darr">→</div><div class="dc dcb">광준 B</div>
+      <div class="dd">
+        sessions.csv (8,000세션) 구글 드라이브 공유
+        <small id="dep-a-b-sub">오늘 중 업로드 예정 — RF 베이스라인 학습 시작 가능</small>
+      </div>
+      <div class="dt dt-w" id="dep-a-b-tag">⏳ 오늘 중</div>
+    </div>
+
+    <!-- dep-id: b9 (model.pkl 전달) 완료 시 → 자동 완료 -->
+    <div class="di" data-dep="dep-b-c">
+      <div class="dc dcb">광준 B</div><div class="darr">→</div><div class="dc dcc">현서 C</div>
+      <div class="dd">
+        model.pkl 완성 → Flask /api/analyze 연동
+        <small id="dep-b-c-sub">src/model/ 에 pkl 저장 시 즉시 연결 가능</small>
+      </div>
+      <div class="dt dt-w" id="dep-b-c-tag">⛔ 대기중</div>
+    </div>
+
+    <!-- 항상 완료 고정 -->
+    <div class="di" id="dep-c-b-row" style="border-color:rgba(52,211,153,.2)">
+      <div class="dc dcc">현서 C</div><div class="darr">→</div><div class="dc dcb">광준 B</div>
+      <div class="dd">
+        sessions_dummy.csv 제공 완료
+        <small>data/processed/ · 100개 세션 · feature/parser 브랜치</small>
+      </div>
+      <div class="dt dt-ok">✓ 완료</div>
+    </div>
+
+    <!-- c1~c6 중 하나라도 완료면 → 완료 고정 (이미 완료) -->
+    <div class="di" id="dep-c-all-row" style="border-color:rgba(52,211,153,.2)">
+      <div class="dc dcc">현서 C</div><div class="darr">→</div><div class="dc" style="background:rgba(255,255,255,.04);color:var(--muted)">팀 전체</div>
+      <div class="dd">
+        Flask API 서버 완성 — 모든 팀원 연동 가능
+        <small>GET /api/sessions · POST /api/analyze · POST /api/upload-pcap</small>
+      </div>
+      <div class="dt dt-ok">✓ 완료</div>
+    </div>
+
+  </div>
+
+  <div class="panel" style="margin-top:20px">
+    <div class="ptitle">팀원별 다음 액션</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
+      <div>
+        <div style="font-family:var(--mono);font-size:10px;color:var(--a);margin-bottom:8px">이안 (A) — 최우선</div>
+        <code style="font-family:var(--mono);font-size:11px;background:var(--s2);padding:8px 12px;border-radius:8px;display:block;color:var(--text);line-height:2">sudo sipp -sn uac ...<br><span style="color:var(--wip)">  -mi 10000-20000</span><br>→ RTP PCAP 생성</code>
+      </div>
+      <div>
+        <div style="font-family:var(--mono);font-size:10px;color:var(--b);margin-bottom:8px">광준 (B) — 즉시 가능</div>
+        <code style="font-family:var(--mono);font-size:11px;background:var(--s2);padding:8px 12px;border-radius:8px;display:block;color:var(--text);line-height:2">git pull origin feature/parser<br>python generate_dummy.py<br>→ ML 훈련 시작</code>
+      </div>
+      <div>
+        <div style="font-family:var(--mono);font-size:10px;color:var(--c);margin-bottom:8px">현서 (C) — 대기중</div>
+        <code style="font-family:var(--mono);font-size:11px;background:var(--s2);padding:8px 12px;border-radius:8px;display:block;color:var(--text);line-height:2">이안님 PCAP 도착 시:<br>POST /api/upload-pcap<br>→ 자동 파싱 + DB 저장</code>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════
+     SCRIPT
+══════════════════════════════ -->
+<script>
+const SK = 'incognito_v2';
+
+// ── 상태 정의 ──────────────────
+const TASK_CYC  = ['s-done','s-wip','s-pend','s-block'];
+const TASK_DONE = 's-done', TASK_BLOCK = 's-block';
+const WBS_CYC   = ['rs-done','rs-cur','rs-pend'];
+const WBS_LBL   = {'rs-done':'완료','rs-cur':'진행중','rs-pend':'예정'};
+const MC_CYC    = ['msb-done','msb-wip','msb-block'];
+const MC_LBL    = {'msb-done':'완료','msb-wip':'진행중','msb-block':'블로커 대기'};
+const MC_PCLS   = {'msb-done':'var(--done)','msb-wip':'var(--wip)','msb-block':'var(--block)'};
+
+// ── 의존관계 매핑 테이블 ────────
+// 특정 태스크 ID가 s-done 되면 → 어떤 dep 행을 완료로 바꿀지 정의
+const DEP_MAP = {
+  // 이안 a5(RTP PCAP 재생성) 완료 → 이안→현서 행 완료
+  'dep-a-c': {
+    triggerIds: ['a5'],          // 이 태스크 중 하나라도 done이면
+    doneText:  'RTP PCAP 전달 완료 — 파서 실데이터 검증 가능',
+    waitText:  'sipp -mi 옵션 필요 · rtp_parser.py 실데이터 검증 대기중',
+  },
+  // 이안 a7(대량 데이터 생성) 완료 → 이안→광준 행 완료
+  'dep-a-b': {
+    triggerIds: ['a7'],
+    doneText:  'CSV 데이터셋 전달 완료 — ML 본 학습 시작 가능',
+    waitText:  '현재 더미 100개로 ML 구조 설계 중',
+  },
+  // 광준 b9(model.pkl 전달) 완료 → 광준→현서 행 완료
+  'dep-b-c': {
+    triggerIds: ['b9'],
+    doneText:  'model.pkl 전달 완료 — /api/analyze 연동 가능',
+    waitText:  'src/model/ 에 pkl 저장 시 즉시 연결 가능',
+  },
+};
+
+// ── 의존관계 업데이트 ───────────
+function updateDeps() {
+  Object.entries(DEP_MAP).forEach(([depId, cfg]) => {
+    // triggerIds 중 하나라도 s-done 이면 완료 처리
+    const isDone = cfg.triggerIds.some(tid => {
+      const el = document.querySelector(`.ti[data-id="${tid}"]`);
+      return el && el.classList.contains('s-done');
+    });
+
+    const row = document.querySelector(`.di[data-dep="${depId}"]`);
+    const tag = document.getElementById(depId + '-tag');
+    const sub = document.getElementById(depId + '-sub');
+    if (!row || !tag) return;
+
+    if (isDone) {
+      // 완료 스타일
+      row.style.borderColor  = 'rgba(52,211,153,.2)';
+      row.style.transition   = 'border-color .4s';
+      tag.className          = 'dt dt-ok';
+      tag.textContent        = '✓ 완료';
+      if (sub) sub.textContent = cfg.doneText;
+    } else {
+      // 대기 스타일
+      row.style.borderColor  = 'var(--border)';
+      tag.className          = 'dt dt-w';
+      tag.textContent        = '⛔ 대기중';
+      if (sub) sub.textContent = cfg.waitText;
+    }
+  });
+
+  // 완료된 dep 수 요약 (선택 사항: 헤더에 표시)
+  updateDepSummary();
+}
+
+function updateDepSummary() {
+  const total  = Object.keys(DEP_MAP).length + 2; // 고정 완료 2개 포함
+  const fixed  = 2; // 현서→광준, 현서→팀 전체
+  const dynamic = Object.keys(DEP_MAP).filter(depId => {
+    const tag = document.getElementById(depId + '-tag');
+    return tag && tag.classList.contains('dt-ok');
+  }).length;
+  const doneCount = fixed + dynamic;
+
+  // 의존관계 탭 제목 배지 업데이트 (nav 버튼)
+  const navBtns = document.querySelectorAll('.nb');
+  navBtns.forEach(btn => {
+    if (btn.textContent.startsWith('의존')) {
+      btn.textContent = `의존 관계 (${doneCount}/${total})`;
+    }
+  });
+}
+
+// ── 개요 업데이트 ──────────────
+function updateOverview() {
+  // WBS 기반 Phase 진행률 계산
+  const ph = {1:{done:0,total:0}, 2:{done:0,total:0}, 3:{done:0,total:0}};
+  document.querySelectorAll('.rs[data-wid]').forEach(el => {
+    const p = parseInt(el.dataset.phase);
+    if (!p || !ph[p]) return;
+    ph[p].total++;
+    if (el.classList.contains('rs-done')) ph[p].done++;
+  });
+
+  // 전체 주차 완료 수 (phase 0 제외)
+  let totalW = 0, doneW = 0;
+  document.querySelectorAll('.rs[data-wid]').forEach(el => {
+    const p = parseInt(el.dataset.phase);
+    if (!p) return;
+    totalW++;
+    if (el.classList.contains('rs-done')) doneW++;
+  });
+
+  // 전체 진행률 (16주 기준: 완료주차/10 * 100, 16주 환산)
+  const ovPct = totalW > 0 ? Math.round((doneW / 10) * 100 * (10/16)) : 0;
+  // 각 Phase %
+  function phasePct(p) {
+    return ph[p].total > 0 ? Math.round((ph[p].done / ph[p].total) * 100) : 0;
+  }
+
+  const p1 = phasePct(1), p2 = phasePct(2), p3 = phasePct(3);
+
+  // 진행률 바 업데이트
+  setBar('ph1-bar','ph1-pct', p1, p1>0?'var(--a)':'var(--muted)');
+  setBar('ph2-bar','ph2-pct', p2, p2>0?'var(--b)':'var(--muted)');
+  setBar('ph3-bar','ph3-pct', p3, p3>0?'var(--c)':'var(--muted)');
+  setBar('ov-bar',  'ov-bar-pct', ovPct, ovPct>0?'var(--a)':'var(--muted)');
+
+  // 통계 카드
+  const ovPctEl = document.getElementById('ov-pct');
+  const prevPct = ovPctEl.textContent;
+  ovPctEl.textContent = ovPct + '%';
+  document.getElementById('ov-week').textContent = `${doneW}주차 완료 / 총 16주`;
+  document.getElementById('ov-done').textContent = doneW;
+
+  // Phase 레이블
+  let phLabel = 'Phase 시작 전';
+  if (p3 > 0)       phLabel = 'Phase 3 진행중';
+  else if (p2 > 0)  phLabel = 'Phase 2 진행중';
+  else if (p1 > 0)  phLabel = 'Phase 1 진행중';
+  if (p1===100 && p2===100 && p3===100) phLabel = '🎉 전체 완료!';
+  document.getElementById('ov-phase').textContent = phLabel;
+
+  // 통계 카드 flash 애니메이션
+  if (prevPct !== ovPct + '%') flashEl('sc-pct');
+  flashEl('sc-done');
+
+  // 블로커 목록 업데이트
+  updateBlockers();
+
+  // 헤더 주차 업데이트
+  document.getElementById('hd-week').textContent = doneW + '주차 완료';
+}
+
+function setBar(barId, pctId, val, color) {
+  const bar = document.getElementById(barId);
+  const lbl = document.getElementById(pctId);
+  if (bar) bar.style.width = val + '%';
+  if (lbl) {
+    lbl.textContent = val + '%';
+    lbl.style.color = color;
+  }
+}
+
+function flashEl(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.classList.remove('flash');
+  void el.offsetWidth; // reflow
+  el.classList.add('flash');
+}
+
+function updateBlockers() {
+  const list  = document.getElementById('blocker-list');
+  const empty = document.getElementById('blocker-empty');
+  const count = document.getElementById('blocker-count');
+  list.innerHTML = '';
+  const blockers = document.querySelectorAll('.ti.s-block[data-blocker]');
+  blockers.forEach(el => {
+    const txt = el.dataset.blocker || el.querySelector('.tt')?.textContent || '';
+    const member = el.dataset.member || '?';
+    const colorMap = {A:'var(--a)', B:'var(--b)', C:'var(--c)'};
+    const row = document.createElement('div');
+    row.className = 'brow';
+    row.innerHTML = `
+      <span style="font-family:var(--mono);font-size:10px;padding:2px 8px;border-radius:5px;background:rgba(255,255,255,.06);color:${colorMap[member]||'var(--muted)'};white-space:nowrap">멤버 ${member}</span>
+      ${txt.replace('⛔ ','')}
+      <span style="margin-left:auto;font-family:var(--mono);font-size:10px;color:var(--block)">WAITING</span>`;
+    list.appendChild(row);
+  });
+  // 블로커가 없는 ti.s-block (data-blocker 없는 것)도 포함
+  const all = document.querySelectorAll('.ti.s-block');
+  const cnt = all.length;
+  count.textContent = cnt;
+  if (cnt === 0) {
+    empty.style.display = 'block';
+    list.style.display  = 'none';
+    document.getElementById('blocker-panel').style.borderColor = 'rgba(52,211,153,.2)';
+    document.querySelector('#blocker-panel .ptitle').style.color = 'var(--done)';
+    document.querySelector('#blocker-panel .ptitle').textContent = '✅ 블로커 ';
+    document.querySelector('#blocker-panel .ptitle').appendChild(count);
+  } else {
+    empty.style.display = 'none';
+    list.style.display  = '';
+    document.getElementById('blocker-panel').style.borderColor = 'rgba(248,113,113,.2)';
+    const pt = document.querySelector('#blocker-panel .ptitle');
+    pt.style.color = 'var(--block)';
+    pt.innerHTML = '⛔ 현재 블로커 ';
+    pt.appendChild(count);
+  }
+}
+
+// ── 태스크 상태 토글 ────────────
+function cycleTask(item) {
+  const cur  = TASK_CYC.find(s => item.classList.contains(s)) || 's-pend';
+  const next = TASK_CYC[(TASK_CYC.indexOf(cur)+1) % TASK_CYC.length];
+  TASK_CYC.forEach(s => item.classList.remove(s));
+  item.classList.add(next);
+  const tt = item.querySelector('.tt');
+  if (tt) {
+    tt.style.textDecoration = next==='s-done' ? 'line-through' : '';
+    tt.style.color = next==='s-done' ? 'var(--muted)' : '';
+  }
+  saveState();
+  updateOverview();
+  updateDeps();
+}
+
+// ── WBS 상태 토글 ───────────────
+function cycleWbs(el) {
+  const cur  = WBS_CYC.find(s => el.classList.contains(s)) || 'rs-pend';
+  const next = WBS_CYC[(WBS_CYC.indexOf(cur)+1) % WBS_CYC.length];
+  WBS_CYC.forEach(s => el.classList.remove(s));
+  el.classList.add(next);
+  el.textContent = WBS_LBL[next];
+  saveState();
+  updateOverview();
+  updateDeps();
+}
+
+// ── 멤버 배지 토글 ─────────────
+function cycleMc(el) {
+  const cur  = MC_CYC.find(s => el.classList.contains(s)) || 'msb-wip';
+  const next = MC_CYC[(MC_CYC.indexOf(cur)+1) % MC_CYC.length];
+  MC_CYC.forEach(s => el.classList.remove(s));
+  el.classList.add(next);
+  const span = el.querySelector('span');
+  if (span) span.textContent = MC_LBL[next];
+  saveState();
+}
+
+// ── 이벤트 등록 ────────────────
+function initEvents() {
+  // 태스크 점
+  document.querySelectorAll('.ti .td').forEach(dot => {
+    dot.addEventListener('click', () => cycleTask(dot.closest('.ti')));
+  });
+  // WBS 배지
+  document.querySelectorAll('.rs[data-wid]').forEach(el => {
+    el.addEventListener('click', () => cycleWbs(el));
+  });
+  // 멤버 배지
+  document.querySelectorAll('.msb[data-mc]').forEach(el => {
+    el.addEventListener('click', () => cycleMc(el));
+  });
+}
+
+// ── localStorage ──────────────
+function saveState() {
+  const d = {};
+  document.querySelectorAll('.ti[data-id]').forEach(el => {
+    d['t_'+el.dataset.id] = TASK_CYC.find(s=>el.classList.contains(s))||'s-pend';
+  });
+  document.querySelectorAll('.rs[data-wid]').forEach(el => {
+    d['w_'+el.dataset.wid] = WBS_CYC.find(s=>el.classList.contains(s))||'rs-pend';
+  });
+  document.querySelectorAll('.msb[data-mc]').forEach(el => {
+    d['mc_'+el.dataset.mc] = MC_CYC.find(s=>el.classList.contains(s))||'msb-wip';
+  });
+  document.querySelectorAll('[data-ed]').forEach(el => {
+    d['ed_'+el.dataset.ed] = el.innerHTML;
+  });
+  localStorage.setItem(SK, JSON.stringify(d));
+}
+
+function loadState() {
+  let d; try { d=JSON.parse(localStorage.getItem(SK)||'{}'); } catch(e){return;}
+  document.querySelectorAll('.ti[data-id]').forEach(el => {
+    const s=d['t_'+el.dataset.id]; if(!s)return;
+    TASK_CYC.forEach(c=>el.classList.remove(c)); el.classList.add(s);
+    const tt=el.querySelector('.tt');
+    if(tt){tt.style.textDecoration=s==='s-done'?'line-through':'';tt.style.color=s==='s-done'?'var(--muted)':'';}
+  });
+  document.querySelectorAll('.rs[data-wid]').forEach(el => {
+    const s=d['w_'+el.dataset.wid]; if(!s)return;
+    WBS_CYC.forEach(c=>el.classList.remove(c)); el.classList.add(s);
+    el.textContent=WBS_LBL[s];
+  });
+  document.querySelectorAll('.msb[data-mc]').forEach(el => {
+    const s=d['mc_'+el.dataset.mc]; if(!s)return;
+    MC_CYC.forEach(c=>el.classList.remove(c)); el.classList.add(s);
+    const span=el.querySelector('span'); if(span)span.textContent=MC_LBL[s];
+  });
+  document.querySelectorAll('[data-ed]').forEach(el => {
+    const s=d['ed_'+el.dataset.ed]; if(s)el.innerHTML=s;
+  });
+}
+
+// ── 탭 전환 ───────────────────
+function switchTab(id, btn) {
+  document.querySelectorAll('.tp').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on'));
+  document.getElementById('tab-'+id).classList.add('on');
+  btn.classList.add('on');
+}
+
+// ── 텍스트 편집 ───────────────
+let editOn = false;
+function toggleEdit() {
+  editOn = !editOn;
+  const btn = document.getElementById('etb-team');
+  if (btn) { btn.textContent=editOn?'✅ 편집 완료':'✏️ 텍스트 편집'; btn.classList.toggle('on',editOn); }
+  document.querySelectorAll('[data-ed]').forEach(el => {
+    el.contentEditable = editOn ? 'true' : 'false';
+    if (!editOn) saveState();
+  });
+}
+
+// ── D-Day & 날짜 ──────────────
+(function(){
+  const t=new Date(), dl=new Date('2026-04-26');
+  const diff=Math.ceil((dl-t)/86400000);
+  document.getElementById('hd-dday').textContent = diff>0?diff:'마감!';
+  const y=t.getFullYear(), m=String(t.getMonth()+1).padStart(2,'0'), d=String(t.getDate()).padStart(2,'0');
+  document.getElementById('hd-date').textContent = `${y}.${m}.${d}`;
+})();
+
+// ── 초기화 ────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  initEvents();
+  loadState();
+  updateOverview();
+  updateDeps();
+});
+</script>
+</body>
+</html>
