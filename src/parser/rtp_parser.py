@@ -70,6 +70,17 @@ def extract_features(pcap_path: str, label: int) -> list:
         print(f"  RTP 세션 없음: {pcap_path}")
         return []
 
+    # SSRC가 1개인 경우 패킷 수 기반으로 세션 분리 (SIPp 연속 발송 대응)
+    if len(sessions) == 1:
+        ssrc, all_pkts = list(sessions.items())[0]
+        all_pkts.sort(key=lambda x: x['time'])
+        PKTS_PER_SESSION = 50
+        sessions = {}
+        for i in range(0, len(all_pkts), PKTS_PER_SESSION):
+            chunk = all_pkts[i:i+PKTS_PER_SESSION]
+            if len(chunk) >= 5:
+                sessions[f"{ssrc}_{i//PKTS_PER_SESSION}"] = chunk
+
     results = []
     for ssrc, pkts in sessions.items():
         if len(pkts) < 5:
