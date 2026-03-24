@@ -239,8 +239,8 @@ header{border-bottom:1px solid var(--border);padding:28px 0 20px}
     </div>
     <div class="sc">
       <div class="slb">다음 리비전</div>
-      <div class="sv" style="color:var(--wip);font-size:17px;padding-top:4px">2차</div>
-      <div class="ssub">2/23 ~ 2/27</div>
+      <div class="sv" style="color:var(--wip);font-size:17px;padding-top:4px">3차</div>
+      <div class="ssub">12주차 · 4월 마감 前</div>
     </div>
     <div class="sc">
       <div class="slb">최종 마감</div>
@@ -266,7 +266,7 @@ header{border-bottom:1px solid var(--border);padding:28px 0 20px}
         <div class="pb"><div class="pf" id="ph3-bar" style="background:var(--c)"></div></div>
       </div>
       <div class="pr" style="margin-top:18px;padding-top:14px;border-top:1px solid var(--border)">
-        <div class="pl"><span>전체 (Inc0gnito 16주 기준)</span><strong id="ov-bar-pct">—</strong></div>
+        <div class="pl"><span>전체 (10주 기준)</span><strong id="ov-bar-pct">—</strong></div>
         <div class="pb" style="height:8px"><div class="pf" id="ov-bar" style="background:linear-gradient(90deg,var(--b),var(--a))"></div></div>
       </div>
     </div>
@@ -315,8 +315,7 @@ header{border-bottom:1px solid var(--border);padding:28px 0 20px}
       <div class="ti s-done" data-id="a4" data-member="A"><div class="td"></div><div class="tt" data-ed="a4">Asterisk → SIPp 방식으로 변경 확정</div></div>
       <div class="tsl">진행중 / 예정</div>
       <div class="ti s-done" data-id="a5" data-member="A"><div class="td"></div><div class="tt" data-ed="a5">실제 네트워크 통과 RTP PCAP 생성 완료 (정상/사기 각 100세션)</div></div>
-      <div class="ti s-wip"  data-id="a6" data-member="A"><div class="td"></div><div class="tt" data-ed="a6">PCAP → CSV 변환 진행 중 (광준에게 전달 예정)</div></div>
-      <div class="ti s-wip"  data-id="a9" data-member="A"><div class="td"></div><div class="tt" data-ed="a9">2차 리비전 피드백 — 혼잡도 변수 유효성 추가 조사</div></div>
+      <div class="ti s-wip"  data-id="a9" data-member="A"><div class="td"></div><div class="tt" data-ed="a9">혼잡도 변수 유효성 추가 조사</div></div>
       <div class="ti s-done" data-id="a7" data-member="A"><div class="td"></div><div class="tt" data-ed="a7">sessions.csv 8,000세션 (normal 4,000 / fraud 4,000) 완성 — 현서 주도</div></div>
       <div class="ti s-done" data-id="a8" data-member="A"><div class="td"></div><div class="tt" data-ed="a8">학습 데이터셋 레이블링 및 품질 검증 완료</div></div>
       <div class="msb msb-wip" data-mc="A" data-id="mc-a"><div class="msb-dot"></div><span>진행중</span></div>
@@ -332,7 +331,6 @@ header{border-bottom:1px solid var(--border);padding:28px 0 20px}
       <div class="ti s-done" data-id="b4" data-member="B"><div class="td"></div><div class="tt" data-ed="b4">앙상블 모델 (RF + Isolation Forest) 채택 확정</div></div>
       <div class="tsl">진행중 / 예정</div>
       <div class="ti s-wip"  data-id="b5" data-member="B"><div class="td"></div><div class="tt" data-ed="b5">이안 PCAP → CSV 변환 후 학습 + 현서 sessions.csv 병행 학습 진행 중</div></div>
-      <div class="ti s-wip"  data-id="b10" data-member="B"><div class="td"></div><div class="tt" data-ed="b10">2차 리비전 답변 작성 중 (혼잡도 변수 유효성 검토)</div></div>
       <div class="ti s-done" data-id="b6" data-member="B"><div class="td"></div><div class="tt" data-ed="b6">Feature Engineering 초안 완성 — 지터·IAT 분산·패킷 손실률 계산 코드 (Google Colab), PCAP 일괄 업로드·자동 라벨링·CSV 출력</div></div>
       <div class="ti s-pend" data-id="b7" data-member="B"><div class="td"></div><div class="tt" data-ed="b7">XGBoost 도입 (SMOTE 불필요 — 데이터 이미 4:4 균형)</div></div>
       <div class="ti s-pend" data-id="b8" data-member="B"><div class="td"></div><div class="tt" data-ed="b8">Precision / Recall / F1 성능 평가 보고서</div></div>
@@ -354,8 +352,7 @@ header{border-bottom:1px solid var(--border);padding:28px 0 20px}
       <div class="ti s-done" data-id="c7" data-member="C"><div class="td"></div><div class="tt" data-ed="c7">이안님 RTP PCAP 수신 → sessions.csv 파서 검증 완료</div></div>
       <div class="ti s-done" data-id="c9" data-member="C"><div class="td"></div><div class="tt" data-ed="c9">Flask 대시보드 개선 완료 (다크 테마, risk 뱃지, 차트 색상 통일)</div></div>
       <div class="ti s-done" data-id="c10" data-member="C"><div class="td"></div><div class="tt" data-ed="c10">Flask /api/analyze — model.pkl 연동 완료</div></div>
-      <div class="tsl">진행중</div>
-      <div class="ti s-wip"  data-id="c11" data-member="C"><div class="td"></div><div class="tt" data-ed="c11">2차 리비전 답변 작성 담당 (혼잡도 변수 유효성 조사 포함)</div></div>
+      <div class="ti s-done" data-id="c11" data-member="C"><div class="td"></div><div class="tt" data-ed="c11">2차 리비전 답변 작성 완료</div></div>
       <div class="tsl">블로커 대기</div>
       <div class="ti s-block" data-id="c8" data-member="C" data-blocker="광준님 실제 학습 model.pkl 교체 대기"><div class="td"></div><div class="tt" data-ed="c8">⛔ 광준님 실제 학습 model.pkl 교체 대기</div></div>
       <div class="msb msb-wip" data-mc="C" data-id="mc-c"><div class="msb-dot"></div><span>진행중</span></div>
@@ -419,19 +416,19 @@ header{border-bottom:1px solid var(--border);padding:28px 0 20px}
           <td>sessions.csv → 광준 전달, Random Forest 베이스라인 학습 시작, Flask 대시보드 개발 착수</td>
           <td><span class="rs rs-done" data-wid="w5" data-phase="2">완료</span></td>
         </tr>
-        <tr class="wcur">
-          <td class="wn">6주 ◀</td><td style="font-family:var(--mono);font-size:11px;color:var(--wip)">3/15~3/21</td>
+        <tr>
+          <td class="wn">6주</td><td style="font-family:var(--mono);font-size:11px;color:var(--muted)">3/15~3/21</td>
           <td><span class="phc ph2">Phase 2</span></td>
           <td><div class="pills"><span class="pill pa">A</span><span class="pill pb2">B</span><span class="pill pc">C</span></div></td>
           <td>XGBoost 도입, 병행 학습 비교, 혼잡도 변수 유효성 조사, 2차 리비전 답변 작성</td>
-          <td><span class="rs rs-cur" data-wid="w6" data-phase="2">진행중</span></td>
+          <td><span class="rs rs-done" data-wid="w6" data-phase="2">완료</span></td>
         </tr>
-        <tr>
-          <td class="wn">7주</td><td style="font-family:var(--mono);font-size:11px;color:var(--muted)">3/15~3/21</td>
+        <tr class="wcur">
+          <td class="wn">7주 ◀</td><td style="font-family:var(--mono);font-size:11px;color:var(--wip)">3/22~3/28</td>
           <td><span class="phc ph2">Phase 2</span></td>
           <td><div class="pills"><span class="pill pb2">B</span><span class="pill pc">C</span></div></td>
           <td>탐지 엔진 통합, 전처리→예측 자동화 완성, 성능 평가 보고서</td>
-          <td><span class="rs rs-pend" data-wid="w7" data-phase="2">예정</span></td>
+          <td><span class="rs rs-cur" data-wid="w7" data-phase="2">진행중</span></td>
         </tr>
         <tr>
           <td class="wn">8주</td><td style="font-family:var(--mono);font-size:11px;color:var(--muted)">3/22~3/28</td>
@@ -659,8 +656,8 @@ function updateOverview() {
     if (el.classList.contains('rs-done')) doneW++;
   });
 
-  // 전체 진행률 (16주 기준: 완료주차/10 * 100, 16주 환산)
-  const ovPct = totalW > 0 ? Math.round((doneW / 10) * 100 * (10/16)) : 0;
+  // 전체 진행률 (10주 기준)
+  const ovPct = totalW > 0 ? Math.round(doneW / 10 * 100) : 0;
   // 각 Phase %
   function phasePct(p) {
     return ph[p].total > 0 ? Math.round((ph[p].done / ph[p].total) * 100) : 0;
@@ -678,7 +675,7 @@ function updateOverview() {
   const ovPctEl = document.getElementById('ov-pct');
   const prevPct = ovPctEl.textContent;
   ovPctEl.textContent = ovPct + '%';
-  document.getElementById('ov-week').textContent = `${doneW}주차 완료 / 총 16주`;
+  document.getElementById('ov-week').textContent = `${doneW}주차 완료 / 총 10주`;
   document.getElementById('ov-done').textContent = doneW;
 
   // Phase 레이블
