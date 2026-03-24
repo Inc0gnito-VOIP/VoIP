@@ -316,8 +316,7 @@ header{border-bottom:1px solid var(--border);padding:28px 0 20px}
       <div class="tsl">진행중 / 예정</div>
       <div class="ti s-done" data-id="a5" data-member="A"><div class="td"></div><div class="tt" data-ed="a5">실제 네트워크 통과 RTP PCAP 생성 완료 (정상/사기 각 100세션)</div></div>
       <div class="ti s-wip"  data-id="a9" data-member="A"><div class="td"></div><div class="tt" data-ed="a9">혼잡도 변수 유효성 추가 조사</div></div>
-      <div class="ti s-done" data-id="a7" data-member="A"><div class="td"></div><div class="tt" data-ed="a7">sessions.csv 8,000세션 (normal 4,000 / fraud 4,000) 완성 — 현서 주도</div></div>
-      <div class="ti s-done" data-id="a8" data-member="A"><div class="td"></div><div class="tt" data-ed="a8">학습 데이터셋 레이블링 및 품질 검증 완료</div></div>
+      <div class="ti s-done" data-id="a7" data-member="A"><div class="td"></div><div class="tt" data-ed="a7">이안 생성 PCAP → 광준에게 전달 완료 (Ver.2 학습 데이터 원본)</div></div>
       <div class="msb msb-wip" data-mc="A" data-id="mc-a"><div class="msb-dot"></div><span>진행중</span></div>
     </div>
 
@@ -330,7 +329,8 @@ header{border-bottom:1px solid var(--border);padding:28px 0 20px}
       <div class="ti s-done" data-id="b3" data-member="B"><div class="td"></div><div class="tt" data-ed="b3">RFC 3550 지터 계산 로직 연구</div></div>
       <div class="ti s-done" data-id="b4" data-member="B"><div class="td"></div><div class="tt" data-ed="b4">앙상블 모델 (RF + Isolation Forest) 채택 확정</div></div>
       <div class="tsl">진행중 / 예정</div>
-      <div class="ti s-wip"  data-id="b5" data-member="B"><div class="td"></div><div class="tt" data-ed="b5">이안 PCAP → CSV 변환 후 학습 + 현서 sessions.csv 병행 학습 진행 중</div></div>
+      <div class="ti s-done" data-id="b11" data-member="B"><div class="td"></div><div class="tt" data-ed="b11">이안 PCAP → CSV 변환 완료 (Ver.2 학습 데이터)</div></div>
+      <div class="ti s-wip"  data-id="b5" data-member="B"><div class="td"></div><div class="tt" data-ed="b5">Ver.1(현서 패킷 기반 sessions.csv) + Ver.2(이안 패킷 기반 CSV) 2버전 병행 학습 진행 중</div></div>
       <div class="ti s-done" data-id="b6" data-member="B"><div class="td"></div><div class="tt" data-ed="b6">Feature Engineering 초안 완성 — 지터·IAT 분산·패킷 손실률 계산 코드 (Google Colab), PCAP 일괄 업로드·자동 라벨링·CSV 출력</div></div>
       <div class="ti s-pend" data-id="b7" data-member="B"><div class="td"></div><div class="tt" data-ed="b7">XGBoost 도입 (SMOTE 불필요 — 데이터 이미 4:4 균형)</div></div>
       <div class="ti s-pend" data-id="b8" data-member="B"><div class="td"></div><div class="tt" data-ed="b8">Precision / Recall / F1 성능 평가 보고서</div></div>
@@ -349,7 +349,7 @@ header{border-bottom:1px solid var(--border);padding:28px 0 20px}
       <div class="ti s-done" data-id="c5" data-member="C"><div class="td"></div><div class="tt" data-ed="c5">대시보드 MVP (Chart.js 지터 그래프 + PCAP 업로드)</div></div>
       <div class="ti s-done" data-id="c6" data-member="C"><div class="td"></div><div class="tt" data-ed="c6">feature/parser 브랜치 GitHub push</div></div>
       <div class="tsl">완료 (6주차)</div>
-      <div class="ti s-done" data-id="c7" data-member="C"><div class="td"></div><div class="tt" data-ed="c7">이안님 RTP PCAP 수신 → sessions.csv 파서 검증 완료</div></div>
+      <div class="ti s-done" data-id="c7" data-member="C"><div class="td"></div><div class="tt" data-ed="c7">자체 생성 패킷 → sessions.csv (8,000세션) 변환 완료 · GitHub 업로드 (Ver.1 학습 데이터)</div></div>
       <div class="ti s-done" data-id="c9" data-member="C"><div class="td"></div><div class="tt" data-ed="c9">Flask 대시보드 개선 완료 (다크 테마, risk 뱃지, 차트 색상 통일)</div></div>
       <div class="ti s-done" data-id="c10" data-member="C"><div class="td"></div><div class="tt" data-ed="c10">Flask /api/analyze — model.pkl 연동 완료</div></div>
       <div class="ti s-done" data-id="c11" data-member="C"><div class="td"></div><div class="tt" data-ed="c11">2차 리비전 답변 작성 완료</div></div>
