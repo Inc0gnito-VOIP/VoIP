@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="UTF-8">
+<!-- saved from url=(0038)https://inc0gnito-voip.github.io/VoIP/ -->
+<html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Inc0gnito — 프로젝트 현황판</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="./Inc0gnito — 프로젝트 현황판_files/css2" rel="stylesheet">
 <style>
 :root {
   --bg:#07090f; --s0:#0c1018; --s1:#111827; --s2:#1a2535; --border:#1e2d42;
@@ -186,7 +186,7 @@ header{border-bottom:1px solid var(--border);padding:28px 0 20px}
 .brow{display:flex;align-items:center;gap:10px;font-size:13px;padding:8px 12px;background:rgba(248,113,113,.04);border-radius:8px;flex-wrap:wrap;margin-bottom:8px}
 
 @media(max-width:480px){.proj-title{font-size:16px}.og{grid-template-columns:1fr}}
-</style>
+</style><link type="text/css" rel="stylesheet" id="dark-mode-custom-link"><link type="text/css" rel="stylesheet" id="dark-mode-general-link"><style lang="en" type="text/css" id="dark-mode-custom-style"></style><style lang="en" type="text/css" id="dark-mode-native-style"></style><style lang="en" type="text/css" id="dark-mode-native-sheet"></style>
 </head>
 <body>
 
@@ -200,17 +200,17 @@ header{border-bottom:1px solid var(--border);padding:28px 0 20px}
       </div>
       <div class="hd-meta">
         <div class="chip live">● LIVE</div>
-        <div class="chip" id="hd-date">—</div>
-        <div class="chip" id="hd-week">—</div>
-        <div class="chip">D-<span id="hd-dday">?</span></div>
+        <div class="chip" id="hd-date">2026.04.02</div>
+        <div class="chip" id="hd-week">4주차 완료</div>
+        <div class="chip">D-<span id="hd-dday">24</span></div>
       </div>
     </div>
   </header>
   <nav class="nav">
-    <button class="nb on"  onclick="switchTab('ov',this)">개요</button>
-    <button class="nb"     onclick="switchTab('team',this)">팀원 현황</button>
-    <button class="nb"     onclick="switchTab('wbs',this)">WBS 일정</button>
-    <button class="nb"     onclick="switchTab('deps',this)">의존 관계</button>
+    <button class="nb on" onclick="switchTab(&#39;ov&#39;,this)">개요</button>
+    <button class="nb" onclick="switchTab(&#39;team&#39;,this)">팀원 현황</button>
+    <button class="nb" onclick="switchTab(&#39;wbs&#39;,this)">WBS 일정</button>
+    <button class="nb" onclick="switchTab(&#39;deps&#39;,this)">의존 관계 (3/5)</button>
   </nav>
 </div>
 
@@ -222,20 +222,20 @@ header{border-bottom:1px solid var(--border);padding:28px 0 20px}
 
   <div class="eb">
     <span>● 팀원 현황 · WBS 탭에서 상태를 변경하면 개요가 자동 반영돼요</span>
-    <button class="etb on" onclick="switchTab('team', document.querySelectorAll('.nb')[1])">팀원 현황 바로가기 →</button>
+    <button class="etb on" onclick="switchTab(&#39;team&#39;, document.querySelectorAll(&#39;.nb&#39;)[1])">팀원 현황 바로가기 →</button>
   </div>
 
   <!-- 통계 카드 -->
   <div class="sg">
-    <div class="sc" id="sc-pct">
+    <div class="sc flash" id="sc-pct">
       <div class="slb">전체 진행률</div>
-      <div class="sv" id="ov-pct" style="color:var(--a)">—</div>
-      <div class="ssub" id="ov-week">계산 중…</div>
+      <div class="sv" id="ov-pct" style="color:var(--a)">40%</div>
+      <div class="ssub" id="ov-week">4주차 완료 / 총 10주</div>
     </div>
-    <div class="sc" id="sc-done">
+    <div class="sc flash" id="sc-done">
       <div class="slb">완료 주차</div>
-      <div class="sv" id="ov-done" style="color:var(--done)">—</div>
-      <div class="ssub" id="ov-phase">—</div>
+      <div class="sv" id="ov-done" style="color:var(--done)">4</div>
+      <div class="ssub" id="ov-phase">Phase 2 진행중</div>
     </div>
     <div class="sc">
       <div class="slb">다음 리비전</div>
@@ -254,20 +254,20 @@ header{border-bottom:1px solid var(--border);padding:28px 0 20px}
     <div class="panel">
       <div class="ptitle">단계별 진행률 (WBS 상태 기반 자동 계산)</div>
       <div class="pr">
-        <div class="pl"><span>Phase 1 · 기획 및 데이터 생성 (1~3주)</span><strong id="ph1-pct">—</strong></div>
-        <div class="pb"><div class="pf" id="ph1-bar" style="background:linear-gradient(90deg,var(--b),var(--a))"></div></div>
+        <div class="pl"><span>Phase 1 · 기획 및 데이터 생성 (1~3주)</span><strong id="ph1-pct" style="color: var(--a);">100%</strong></div>
+        <div class="pb"><div class="pf" id="ph1-bar" style="background: linear-gradient(90deg,var(--b),var(--a)); width: 100%;"></div></div>
       </div>
       <div class="pr">
-        <div class="pl"><span>Phase 2 · 알고리즘 개발 및 모델링 (4~7주)</span><strong id="ph2-pct">—</strong></div>
-        <div class="pb"><div class="pf" id="ph2-bar" style="background:var(--b)"></div></div>
+        <div class="pl"><span>Phase 2 · 알고리즘 개발 및 모델링 (4~7주)</span><strong id="ph2-pct" style="color: var(--b);">25%</strong></div>
+        <div class="pb"><div class="pf" id="ph2-bar" style="background: var(--b); width: 25%;"></div></div>
       </div>
       <div class="pr">
-        <div class="pl"><span>Phase 3 · 시스템 통합 및 완료 (8~10주)</span><strong id="ph3-pct">—</strong></div>
-        <div class="pb"><div class="pf" id="ph3-bar" style="background:var(--c)"></div></div>
+        <div class="pl"><span>Phase 3 · 시스템 통합 및 완료 (8~10주)</span><strong id="ph3-pct" style="color: var(--muted);">0%</strong></div>
+        <div class="pb"><div class="pf" id="ph3-bar" style="background: var(--c); width: 0%;"></div></div>
       </div>
       <div class="pr" style="margin-top:18px;padding-top:14px;border-top:1px solid var(--border)">
-        <div class="pl"><span>전체 (10주 기준)</span><strong id="ov-bar-pct">—</strong></div>
-        <div class="pb" style="height:8px"><div class="pf" id="ov-bar" style="background:linear-gradient(90deg,var(--b),var(--a))"></div></div>
+        <div class="pl"><span>전체 (10주 기준)</span><strong id="ov-bar-pct" style="color: var(--a);">40%</strong></div>
+        <div class="pb" style="height:8px"><div class="pf" id="ov-bar" style="background: linear-gradient(90deg,var(--b),var(--a)); width: 40%;"></div></div>
       </div>
     </div>
 
@@ -286,8 +286,11 @@ header{border-bottom:1px solid var(--border);padding:28px 0 20px}
 
   <!-- 블로커 -->
   <div class="panel" id="blocker-panel" style="border-color:rgba(248,113,113,.2)">
-    <div class="ptitle" style="color:var(--block)">⛔ 현재 블로커 <span id="blocker-count" style="font-size:10px;background:rgba(248,113,113,.15);padding:2px 7px;border-radius:99px;margin-left:6px">0</span></div>
-    <div id="blocker-list"></div>
+    <div class="ptitle" style="color:var(--block)">⛔ 현재 블로커 <span id="blocker-count" style="font-size:10px;background:rgba(248,113,113,.15);padding:2px 7px;border-radius:99px;margin-left:6px">1</span></div>
+    <div id="blocker-list"><div class="brow">
+      <span style="font-family:var(--mono);font-size:10px;padding:2px 8px;border-radius:5px;background:rgba(255,255,255,.06);color:var(--c);white-space:nowrap">멤버 C</span>
+      광준님 실제 학습 model.pkl 교체 대기
+      <span style="margin-left:auto;font-family:var(--mono);font-size:10px;color:var(--block)">WAITING</span></div></div>
     <div id="blocker-empty" style="font-size:13px;color:var(--done);display:none">✅ 현재 블로커 없음 — 순항 중!</div>
   </div>
 
@@ -309,29 +312,29 @@ header{border-bottom:1px solid var(--border);padding:28px 0 20px}
     <div class="mc mc-a">
       <div class="mc-hd"><div class="av">A</div><div><div class="mc-name">이안</div><div class="mc-role">네트워크 · 데이터 엔지니어</div></div></div>
       <div class="tsl">완료</div>
-      <div class="ti s-done" data-id="a1" data-member="A"><div class="td" title="클릭해서 상태 변경"></div><div class="tt" data-ed="a1">리눅스 VM (Ubuntu) 환경 셋업</div></div>
-      <div class="ti s-done" data-id="a2" data-member="A"><div class="td"></div><div class="tt" data-ed="a2">WSL 2 도입 — 패킷 미전송 이슈 해결</div></div>
-      <div class="ti s-done" data-id="a3" data-member="A"><div class="td"></div><div class="tt" data-ed="a3">SIPp 시도 → Python Scapy 직접 생성으로 전환 확정</div></div>
-      <div class="ti s-done" data-id="a4" data-member="A"><div class="td"></div><div class="tt" data-ed="a4">Asterisk → SIPp 방식으로 변경 확정</div></div>
+      <div class="ti s-done" data-id="a1" data-member="A"><div class="td" title="클릭해서 상태 변경"></div><div class="tt" data-ed="a1" style="text-decoration: line-through; color: var(--muted);">리눅스 VM (Ubuntu) 환경 셋업</div></div>
+      <div class="ti s-done" data-id="a2" data-member="A"><div class="td"></div><div class="tt" data-ed="a2" style="text-decoration: line-through; color: var(--muted);">WSL 2 도입 — 패킷 미전송 이슈 해결</div></div>
+      <div class="ti s-done" data-id="a3" data-member="A"><div class="td"></div><div class="tt" data-ed="a3" style="text-decoration: line-through; color: var(--muted);">SIPp 시도 → Python Scapy 직접 생성으로 전환 확정</div></div>
+      <div class="ti s-done" data-id="a4" data-member="A"><div class="td"></div><div class="tt" data-ed="a4" style="text-decoration: line-through; color: var(--muted);">Asterisk → SIPp 방식으로 변경 확정</div></div>
       <div class="tsl">진행중 / 예정</div>
-      <div class="ti s-done" data-id="a5" data-member="A"><div class="td"></div><div class="tt" data-ed="a5">실제 네트워크 통과 RTP PCAP 생성 완료 (정상/사기 각 100세션)</div></div>
-      <div class="ti s-wip"  data-id="a9" data-member="A"><div class="td"></div><div class="tt" data-ed="a9">혼잡도 변수 유효성 추가 조사</div></div>
-      <div class="ti s-done" data-id="a7" data-member="A"><div class="td"></div><div class="tt" data-ed="a7">이안 생성 PCAP → 광준에게 전달 완료 (Ver.2 학습 데이터 원본)</div></div>
-      <div class="msb msb-wip" data-mc="A" data-id="mc-a"><div class="msb-dot"></div><span>진행중</span></div>
+      <div class="ti s-pend" data-id="a5" data-member="A"><div class="td"></div><div class="tt" data-ed="a5">tc-netem 시나리오 다양화 검토 (현재 Python 생성으로 대체됨)</div></div>
+      <div class="ti s-wip" data-id="a9" data-member="A"><div class="td"></div><div class="tt" data-ed="a9">혼잡도 변수 유효성 추가 조사</div></div>
+      <div class="ti s-done" data-id="a7" data-member="A"><div class="td"></div><div class="tt" data-ed="a7" style="text-decoration: line-through; color: var(--muted);">sessions.csv 8,000세션 (normal 4,000 / fraud 4,000) 완성 — 현서 주도</div></div>
+      <div class="msb msb-done" data-mc="A" data-id="mc-a"><div class="msb-dot"></div><span>완료</span></div>
     </div>
 
     <!-- B: 광준 -->
     <div class="mc mc-b">
       <div class="mc-hd"><div class="av">B</div><div><div class="mc-name">광준</div><div class="mc-role">AI 모델러 · 분석가</div></div></div>
       <div class="tsl">완료</div>
-      <div class="ti s-done" data-id="b1" data-member="B"><div class="td"></div><div class="tt" data-ed="b1">데이터 파이프라인 구조 정의 (Raw/Processed)</div></div>
-      <div class="ti s-done" data-id="b2" data-member="B"><div class="td"></div><div class="tt" data-ed="b2">더미 데이터 기반 ML 코드 구조 설계</div></div>
-      <div class="ti s-done" data-id="b3" data-member="B"><div class="td"></div><div class="tt" data-ed="b3">RFC 3550 지터 계산 로직 연구</div></div>
-      <div class="ti s-done" data-id="b4" data-member="B"><div class="td"></div><div class="tt" data-ed="b4">앙상블 모델 (RF + Isolation Forest) 채택 확정</div></div>
+      <div class="ti s-done" data-id="b1" data-member="B"><div class="td"></div><div class="tt" data-ed="b1" style="text-decoration: line-through; color: var(--muted);">데이터 파이프라인 구조 정의 (Raw/Processed)</div></div>
+      <div class="ti s-done" data-id="b2" data-member="B"><div class="td"></div><div class="tt" data-ed="b2" style="text-decoration: line-through; color: var(--muted);">더미 데이터 기반 ML 코드 구조 설계</div></div>
+      <div class="ti s-done" data-id="b3" data-member="B"><div class="td"></div><div class="tt" data-ed="b3" style="text-decoration: line-through; color: var(--muted);">RFC 3550 지터 계산 로직 연구</div></div>
+      <div class="ti s-done" data-id="b4" data-member="B"><div class="td"></div><div class="tt" data-ed="b4" style="text-decoration: line-through; color: var(--muted);">앙상블 모델 (RF + Isolation Forest) 채택 확정</div></div>
       <div class="tsl">진행중 / 예정</div>
       <div class="ti s-done" data-id="b11" data-member="B"><div class="td"></div><div class="tt" data-ed="b11">이안 PCAP → CSV 변환 완료 (Ver.2 학습 데이터)</div></div>
-      <div class="ti s-wip"  data-id="b5" data-member="B"><div class="td"></div><div class="tt" data-ed="b5">Ver.1(현서 패킷 기반 sessions.csv) + Ver.2(이안 패킷 기반 CSV) 2버전 병행 학습 진행 중</div></div>
-      <div class="ti s-done" data-id="b6" data-member="B"><div class="td"></div><div class="tt" data-ed="b6">Feature Engineering 초안 완성 — 지터·IAT 분산·패킷 손실률 계산 코드 (Google Colab), PCAP 일괄 업로드·자동 라벨링·CSV 출력</div></div>
+      <div class="ti s-wip" data-id="b5" data-member="B"><div class="td"></div><div class="tt" data-ed="b5">실제 sessions.csv (8,000세션) 수령 후 Random Forest 베이스라인 학습</div></div>
+      <div class="ti s-done" data-id="b6" data-member="B"><div class="td"></div><div class="tt" data-ed="b6" style="text-decoration: line-through; color: var(--muted);">Feature Engineering 초안 완성 — 지터·IAT 분산·패킷 손실률 계산 코드 (Google Colab), PCAP 일괄 업로드·자동 라벨링·CSV 출력</div></div>
       <div class="ti s-pend" data-id="b7" data-member="B"><div class="td"></div><div class="tt" data-ed="b7">XGBoost 도입 (SMOTE 불필요 — 데이터 이미 4:4 균형)</div></div>
       <div class="ti s-pend" data-id="b8" data-member="B"><div class="td"></div><div class="tt" data-ed="b8">Precision / Recall / F1 성능 평가 보고서</div></div>
       <div class="ti s-pend" data-id="b9" data-member="B"><div class="td"></div><div class="tt" data-ed="b9"><code style="font-family:var(--mono);font-size:10px;background:var(--s2);padding:1px 4px;border-radius:3px">model.pkl</code> → src/model/ 저장 후 현서에게 전달</div></div>
@@ -341,22 +344,22 @@ header{border-bottom:1px solid var(--border);padding:28px 0 20px}
     <!-- C: 현서 -->
     <div class="mc mc-c">
       <div class="mc-hd"><div class="av">C</div><div><div class="mc-name">현서</div><div class="mc-role">소프트웨어 · 웹 개발자</div></div></div>
-      <div class="tsl">완료 (3주차)</div>
+      <div class="tsl">완료 (7주차)</div>
       <div class="ti s-done" data-id="c1" data-member="C"><div class="td"></div><div class="tt" data-ed="c1">Flask 서버 + SQLite DB 구축 및 기동 확인</div></div>
       <div class="ti s-done" data-id="c2" data-member="C"><div class="td"></div><div class="tt" data-ed="c2">REST API 5개 완성 (sessions, stats, analyze, upload-pcap)</div></div>
       <div class="ti s-done" data-id="c3" data-member="C"><div class="td"></div><div class="tt" data-ed="c3">rtp_parser.py — RFC 3550 지터 + IAT 세션 특징 추출</div></div>
-      <div class="ti s-done" data-id="c4" data-member="C"><div class="td"></div><div class="tt" data-ed="c4">더미 데이터 100개 DB 삽입 검증 완료</div></div>
-      <div class="ti s-done" data-id="c5" data-member="C"><div class="td"></div><div class="tt" data-ed="c5">대시보드 MVP (Chart.js 지터 그래프 + PCAP 업로드)</div></div>
-      <div class="ti s-done" data-id="c6" data-member="C"><div class="td"></div><div class="tt" data-ed="c6">feature/parser 브랜치 GitHub push</div></div>
-      <div class="tsl">완료 (6주차)</div>
-      <div class="ti s-done" data-id="c7" data-member="C"><div class="td"></div><div class="tt" data-ed="c7">자체 생성 패킷 → sessions.csv (8,000세션) 변환 완료 · GitHub 업로드 (Ver.1 학습 데이터)</div></div>
-      <div class="ti s-done" data-id="c12" data-member="C"><div class="td"></div><div class="tt" data-ed="c12">sessions.csv 구글 드라이브 업로드 → 광준 공유 완료</div></div>
+      <div class="ti s-done" data-id="c4" data-member="C"><div class="td"></div><div class="tt" data-ed="c4">sessions.csv 8,000세션 생성 완료 (정상 4,000 / 사기 4,000)</div></div>
+      <div class="ti s-done" data-id="c5" data-member="C"><div class="td"></div><div class="tt" data-ed="c5">대시보드 MVP (Chart.js 지터/레이턴시 그래프 + 세션 테이블)</div></div>
+      <div class="ti s-done" data-id="c6" data-member="C"><div class="td"></div><div class="tt" data-ed="c6">sessions.csv 구글 드라이브 업로드 → 광준 공유 완료</div></div>
       <div class="ti s-done" data-id="c13" data-member="C"><div class="td"></div><div class="tt" data-ed="c13">README 업데이트 (Streamlit→Flask, tc-netem→Python Scapy 반영)</div></div>
-      <div class="ti s-done" data-id="c9" data-member="C"><div class="td"></div><div class="tt" data-ed="c9">Flask 대시보드 개선 완료 (다크 테마, risk 뱃지, 차트 색상 통일)</div></div>
-      <div class="ti s-done" data-id="c10" data-member="C"><div class="td"></div><div class="tt" data-ed="c10">Flask /api/analyze — model.pkl 연동 완료</div></div>
-      <div class="ti s-done" data-id="c11" data-member="C"><div class="td"></div><div class="tt" data-ed="c11">2차 리비전 답변 작성 완료</div></div>
+      <div class="ti s-done" data-id="c10" data-member="C"><div class="td"></div><div class="tt" data-ed="c10">Flask /api/analyze, /api/analyze/batch — model.pkl 연동 완료</div></div>
+      <div class="ti s-done" data-id="c14" data-member="C"><div class="td"></div><div class="tt" data-ed="c14">HIGH/MEDIUM/LOW 리스크 배지 대시보드 반영 완료</div></div>
+      <div class="ti s-done" data-id="c11" data-member="C"><div class="td"></div><div class="tt" data-ed="c11">2차 리비전 답변 작성 및 제출 완료</div></div>
+      <div class="ti s-done" data-id="c12" data-member="C"><div class="td"></div><div class="tt" data-ed="c12">혼잡도 변수 유효성 테스트 완료 (F1 변화 없음 확인)</div></div>
+      <div class="tsl">진행중</div>
+      <div class="ti s-wip" data-id="c7" data-member="C"><div class="td"></div><div class="tt" data-ed="c7">3차 리비전 준비 — 파이프라인 시연 시나리오 구성</div></div>
       <div class="tsl">블로커 대기</div>
-      <div class="ti s-block" data-id="c8" data-member="C" data-blocker="광준님 실제 학습 model.pkl 교체 대기"><div class="td"></div><div class="tt" data-ed="c8">⛔ 광준님 실제 학습 model.pkl 교체 대기</div></div>
+      <div class="ti s-block" data-id="c8" data-member="C" data-blocker="광준님 XGBoost pkl + 성능 보고서 대기"><div class="td"></div><div class="tt" data-ed="c8">⛔ 광준님 XGBoost pkl + 성능 보고서 대기</div></div>
       <div class="msb msb-wip" data-mc="C" data-id="mc-c"><div class="msb-dot"></div><span>진행중</span></div>
     </div>
 
@@ -428,8 +431,8 @@ header{border-bottom:1px solid var(--border);padding:28px 0 20px}
         <tr class="wcur">
           <td class="wn">7주 ◀</td><td style="font-family:var(--mono);font-size:11px;color:var(--wip)">3/22~3/28</td>
           <td><span class="phc ph2">Phase 2</span></td>
-          <td><div class="pills"><span class="pill pb2">B</span><span class="pill pc">C</span></div></td>
-          <td>탐지 엔진 통합, 전처리→예측 자동화 완성, 성능 평가 보고서</td>
+          <td><div class="pills"><span class="pill pa">A</span><span class="pill pb2">B</span><span class="pill pc">C</span></div></td>
+          <td>model.pkl 연동 완료, 대시보드 최종 점검, 3차 리비전 준비 (3/30~4/3)</td>
           <td><span class="rs rs-cur" data-wid="w7" data-phase="2">진행중</span></td>
         </tr>
         <tr>
@@ -474,13 +477,13 @@ header{border-bottom:1px solid var(--border);padding:28px 0 20px}
   <div class="dl">
 
     <!-- dep-id: a5 (이안 RTP PCAP 재생성) 완료 시 → 자동 완료 -->
-    <div class="di" data-dep="dep-a-c" style="border-color:rgba(52,211,153,.2)">
+    <div class="di" data-dep="dep-a-c" style="border-color: var(--border);">
       <div class="dc dca">이안 A</div><div class="darr">→</div><div class="dc dcc">현서 C</div>
       <div class="dd">
         RTP 포함 PCAP 파일 전달
-        <small id="dep-a-c-sub">✅ Python Scapy 직접 생성으로 대체 — 블로커 해소됨</small>
+        <small id="dep-a-c-sub">RTP PCAP 생성 대기중 · rtp_parser.py 실데이터 검증 예정</small>
       </div>
-      <div class="dt dt-ok" id="dep-a-c-tag">✅ 해소됨</div>
+      <div class="dt dt-w" id="dep-a-c-tag">⛔ 대기중</div>
     </div>
 
     <!-- dep-id: 현서→광준 sessions.csv 전달 -->
@@ -494,7 +497,7 @@ header{border-bottom:1px solid var(--border);padding:28px 0 20px}
     </div>
 
     <!-- dep-id: b9 (model.pkl 전달) 완료 시 → 자동 완료 -->
-    <div class="di" data-dep="dep-b-c">
+    <div class="di" data-dep="dep-b-c" style="border-color: var(--border);">
       <div class="dc dcb">광준 B</div><div class="darr">→</div><div class="dc dcc">현서 C</div>
       <div class="dd">
         model.pkl 완성 → Flask /api/analyze 연동
@@ -890,5 +893,6 @@ document.addEventListener('DOMContentLoaded', () => {
   updateDeps();
 });
 </script>
-</body>
-</html>
+
+
+</body></html>
