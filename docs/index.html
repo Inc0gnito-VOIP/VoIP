@@ -239,8 +239,8 @@ header{border-bottom:1px solid var(--border);padding:28px 0 20px}
     </div>
     <div class="sc">
       <div class="slb">다음 리비전</div>
-      <div class="sv" style="color:var(--wip);font-size:17px;padding-top:4px">2차</div>
-      <div class="ssub">2/23 ~ 2/27</div>
+      <div class="sv" style="color:var(--wip);font-size:17px;padding-top:4px">3차</div>
+      <div class="ssub">12주차 · 4월 마감 前</div>
     </div>
     <div class="sc">
       <div class="slb">최종 마감</div>
@@ -266,7 +266,7 @@ header{border-bottom:1px solid var(--border);padding:28px 0 20px}
         <div class="pb"><div class="pf" id="ph3-bar" style="background:var(--c)"></div></div>
       </div>
       <div class="pr" style="margin-top:18px;padding-top:14px;border-top:1px solid var(--border)">
-        <div class="pl"><span>전체 (Inc0gnito 16주 기준)</span><strong id="ov-bar-pct">—</strong></div>
+        <div class="pl"><span>전체 (10주 기준)</span><strong id="ov-bar-pct">—</strong></div>
         <div class="pb" style="height:8px"><div class="pf" id="ov-bar" style="background:linear-gradient(90deg,var(--b),var(--a))"></div></div>
       </div>
     </div>
@@ -276,8 +276,8 @@ header{border-bottom:1px solid var(--border);padding:28px 0 20px}
       <div class="ptitle">주요 마일스톤</div>
       <div class="ml">
         <div class="mi"><div class="md md-done">✓</div><div class="mi-info"><div class="mi-name">1차 리비전</div><div class="mi-date">1/14 ~ 1/16</div></div><span class="mb mb-done">완료</span></div>
-        <div class="mi"><div class="md md-cur">●</div><div class="mi-info"><div class="mi-name">2차 리비전</div><div class="mi-date">2/23 ~ 2/27</div></div><span class="mb mb-cur">진행중</span></div>
-        <div class="mi"><div class="md md-next">3</div><div class="mi-info"><div class="mi-name">3차 리비전</div><div class="mi-date">3/30 ~ 4/3</div></div><span class="mb mb-next">예정</span></div>
+        <div class="mi"><div class="md md-done">✓</div><div class="mi-info"><div class="mi-name">2차 리비전</div><div class="mi-date">2/23 ~ 2/27</div></div><span class="mb mb-done">완료</span></div>
+        <div class="mi"><div class="md md-cur">●</div><div class="mi-info"><div class="mi-name">3차 리비전 (12주차)</div><div class="mi-date">4월 마감 前</div></div><span class="mb mb-cur">예정</span></div>
         <div class="mi"><div class="md md-next">F</div><div class="mi-info"><div class="mi-name">최종 마감</div><div class="mi-date">4/26 (일)</div></div><span class="mb mb-next">예정</span></div>
         <div class="mi"><div class="md md-next">C</div><div class="mi-info"><div class="mi-name">Inc0gnito 컨퍼런스</div><div class="mi-date">5/9 (토)</div></div><span class="mb mb-next">예정</span></div>
       </div>
@@ -311,13 +311,12 @@ header{border-bottom:1px solid var(--border);padding:28px 0 20px}
       <div class="tsl">완료</div>
       <div class="ti s-done" data-id="a1" data-member="A"><div class="td" title="클릭해서 상태 변경"></div><div class="tt" data-ed="a1">리눅스 VM (Ubuntu) 환경 셋업</div></div>
       <div class="ti s-done" data-id="a2" data-member="A"><div class="td"></div><div class="tt" data-ed="a2">WSL 2 도입 — 패킷 미전송 이슈 해결</div></div>
-      <div class="ti s-done" data-id="a3" data-member="A"><div class="td"></div><div class="tt" data-ed="a3">SIPp 트래픽 생성 (normal.pcap 29KB / fraud.pcap 36KB)</div></div>
+      <div class="ti s-done" data-id="a3" data-member="A"><div class="td"></div><div class="tt" data-ed="a3">SIPp 시도 → Python Scapy 직접 생성으로 전환 확정</div></div>
       <div class="ti s-done" data-id="a4" data-member="A"><div class="td"></div><div class="tt" data-ed="a4">Asterisk → SIPp 방식으로 변경 확정</div></div>
       <div class="tsl">진행중 / 예정</div>
-      <div class="ti s-wip"  data-id="a5" data-member="A"><div class="td"></div><div class="tt" data-ed="a5">UTM 실패 → 도커로 전환 후 RTP 포함 PCAP 재생성 시도 중</div></div>
-      <div class="ti s-pend" data-id="a6" data-member="A"><div class="td"></div><div class="tt" data-ed="a6">tc-netem 시나리오 다양화 (패킷 손실, 고지터)</div></div>
-      <div class="ti s-pend" data-id="a7" data-member="A"><div class="td"></div><div class="tt" data-ed="a7">1만 세션 이상 대량 데이터 생성 목표</div></div>
-      <div class="ti s-pend" data-id="a8" data-member="A"><div class="td"></div><div class="tt" data-ed="a8">학습 데이터셋 레이블링 및 품질 검증</div></div>
+      <div class="ti s-done" data-id="a5" data-member="A"><div class="td"></div><div class="tt" data-ed="a5">실제 네트워크 통과 RTP PCAP 생성 완료 (정상/사기 각 100세션)</div></div>
+      <div class="ti s-wip"  data-id="a9" data-member="A"><div class="td"></div><div class="tt" data-ed="a9">혼잡도 변수 유효성 추가 조사</div></div>
+      <div class="ti s-done" data-id="a7" data-member="A"><div class="td"></div><div class="tt" data-ed="a7">이안 생성 PCAP → 광준에게 전달 완료 (Ver.2 학습 데이터 원본)</div></div>
       <div class="msb msb-wip" data-mc="A" data-id="mc-a"><div class="msb-dot"></div><span>진행중</span></div>
     </div>
 
@@ -330,9 +329,10 @@ header{border-bottom:1px solid var(--border);padding:28px 0 20px}
       <div class="ti s-done" data-id="b3" data-member="B"><div class="td"></div><div class="tt" data-ed="b3">RFC 3550 지터 계산 로직 연구</div></div>
       <div class="ti s-done" data-id="b4" data-member="B"><div class="td"></div><div class="tt" data-ed="b4">앙상블 모델 (RF + Isolation Forest) 채택 확정</div></div>
       <div class="tsl">진행중 / 예정</div>
-      <div class="ti s-wip"  data-id="b5" data-member="B"><div class="td"></div><div class="tt" data-ed="b5">sessions_dummy.csv로 Random Forest 베이스라인 학습</div></div>
+      <div class="ti s-done" data-id="b11" data-member="B"><div class="td"></div><div class="tt" data-ed="b11">이안 PCAP → CSV 변환 완료 (Ver.2 학습 데이터)</div></div>
+      <div class="ti s-wip"  data-id="b5" data-member="B"><div class="td"></div><div class="tt" data-ed="b5">Ver.1(현서 패킷 기반 sessions.csv) + Ver.2(이안 패킷 기반 CSV) 2버전 병행 학습 진행 중</div></div>
       <div class="ti s-done" data-id="b6" data-member="B"><div class="td"></div><div class="tt" data-ed="b6">Feature Engineering 초안 완성 — 지터·IAT 분산·패킷 손실률 계산 코드 (Google Colab), PCAP 일괄 업로드·자동 라벨링·CSV 출력</div></div>
-      <div class="ti s-pend" data-id="b7" data-member="B"><div class="td"></div><div class="tt" data-ed="b7">XGBoost 도입 + SMOTE 불균형 해결</div></div>
+      <div class="ti s-pend" data-id="b7" data-member="B"><div class="td"></div><div class="tt" data-ed="b7">XGBoost 도입 (SMOTE 불필요 — 데이터 이미 4:4 균형)</div></div>
       <div class="ti s-pend" data-id="b8" data-member="B"><div class="td"></div><div class="tt" data-ed="b8">Precision / Recall / F1 성능 평가 보고서</div></div>
       <div class="ti s-pend" data-id="b9" data-member="B"><div class="td"></div><div class="tt" data-ed="b9"><code style="font-family:var(--mono);font-size:10px;background:var(--s2);padding:1px 4px;border-radius:3px">model.pkl</code> → src/model/ 저장 후 현서에게 전달</div></div>
       <div class="msb msb-wip" data-mc="B" data-id="mc-b"><div class="msb-dot"></div><span>진행중</span></div>
@@ -348,10 +348,16 @@ header{border-bottom:1px solid var(--border);padding:28px 0 20px}
       <div class="ti s-done" data-id="c4" data-member="C"><div class="td"></div><div class="tt" data-ed="c4">더미 데이터 100개 DB 삽입 검증 완료</div></div>
       <div class="ti s-done" data-id="c5" data-member="C"><div class="td"></div><div class="tt" data-ed="c5">대시보드 MVP (Chart.js 지터 그래프 + PCAP 업로드)</div></div>
       <div class="ti s-done" data-id="c6" data-member="C"><div class="td"></div><div class="tt" data-ed="c6">feature/parser 브랜치 GitHub push</div></div>
+      <div class="tsl">완료 (6주차)</div>
+      <div class="ti s-done" data-id="c7" data-member="C"><div class="td"></div><div class="tt" data-ed="c7">자체 생성 패킷 → sessions.csv (8,000세션) 변환 완료 · GitHub 업로드 (Ver.1 학습 데이터)</div></div>
+      <div class="ti s-done" data-id="c12" data-member="C"><div class="td"></div><div class="tt" data-ed="c12">sessions.csv 구글 드라이브 업로드 → 광준 공유 완료</div></div>
+      <div class="ti s-done" data-id="c13" data-member="C"><div class="td"></div><div class="tt" data-ed="c13">README 업데이트 (Streamlit→Flask, tc-netem→Python Scapy 반영)</div></div>
+      <div class="ti s-done" data-id="c9" data-member="C"><div class="td"></div><div class="tt" data-ed="c9">Flask 대시보드 개선 완료 (다크 테마, risk 뱃지, 차트 색상 통일)</div></div>
+      <div class="ti s-done" data-id="c10" data-member="C"><div class="td"></div><div class="tt" data-ed="c10">Flask /api/analyze — model.pkl 연동 완료</div></div>
+      <div class="ti s-done" data-id="c11" data-member="C"><div class="td"></div><div class="tt" data-ed="c11">2차 리비전 답변 작성 완료</div></div>
       <div class="tsl">블로커 대기</div>
-      <div class="ti s-block" data-id="c7" data-member="C" data-blocker="이안님 RTP PCAP → 파서 실데이터 검증"><div class="td"></div><div class="tt" data-ed="c7">⛔ 이안님 RTP PCAP → 파서 실데이터 검증</div></div>
-      <div class="ti s-block" data-id="c8" data-member="C" data-blocker="광준님 model.pkl → /api/analyze 연동"><div class="td"></div><div class="tt" data-ed="c8">⛔ 광준님 model.pkl → /api/analyze 연동</div></div>
-      <div class="msb msb-block" data-mc="C" data-id="mc-c"><div class="msb-dot"></div><span>블로커 대기</span></div>
+      <div class="ti s-block" data-id="c8" data-member="C" data-blocker="광준님 실제 학습 model.pkl 교체 대기"><div class="td"></div><div class="tt" data-ed="c8">⛔ 광준님 실제 학습 model.pkl 교체 대기</div></div>
+      <div class="msb msb-wip" data-mc="C" data-id="mc-c"><div class="msb-dot"></div><span>진행중</span></div>
     </div>
 
   </div>
@@ -391,8 +397,8 @@ header{border-bottom:1px solid var(--border);padding:28px 0 20px}
           <td>tc-netem 시나리오 설계, SIPp 트래픽 생성, Flask MVP + SQLite 구축, PCAP 확보</td>
           <td><span class="rs rs-done" data-wid="w2" data-phase="1">완료</span></td>
         </tr>
-        <tr class="wcur">
-          <td class="wn">3주 ◀</td><td style="font-family:var(--mono);font-size:11px;color:var(--wip)">2/15~2/21</td>
+        <tr>
+          <td class="wn">3주</td><td style="font-family:var(--mono);font-size:11px;color:var(--muted)">2/15~2/21</td>
           <td><span class="phc ph1">Phase 1</span></td>
           <td><div class="pills"><span class="pill pc">C</span></div></td>
           <td>rtp_parser.py 완성, 더미 데이터 생성, DB 연동 검증, API 5개, GitHub push</td>
@@ -402,29 +408,29 @@ header{border-bottom:1px solid var(--border);padding:28px 0 20px}
           <td class="wn">4주</td><td style="font-family:var(--mono);font-size:11px;color:var(--muted)">2/22~2/28</td>
           <td><span class="phc ph2">Phase 2</span></td>
           <td><div class="pills"><span class="pill pa">A</span><span class="pill pb2">B</span><span class="pill pc">C</span></div></td>
-          <td>Feature Engineering, RTP PCAP 파서 실데이터 검증, 파생변수 생성</td>
-          <td><span class="rs rs-cur" data-wid="w4" data-phase="2">진행중</span></td>
+          <td>Feature Engineering, Python Scapy 기반 데이터 생성 전환, sessions.csv 8,000세션 완성</td>
+          <td><span class="rs rs-done" data-wid="w4" data-phase="2">완료</span></td>
         </tr>
         <tr>
-          <td class="wn">5주</td><td style="font-family:var(--mono);font-size:11px;color:var(--muted)">3/1~3/7</td>
+          <td class="wn">5주</td><td style="font-family:var(--mono);font-size:11px;color:var(--muted)">3/8~3/14</td>
           <td><span class="phc ph2">Phase 2</span></td>
           <td><div class="pills"><span class="pill pb2">B</span><span class="pill pc">C</span></div></td>
-          <td>Random Forest 베이스라인 학습, 전처리 자동화 파이프라인 설계</td>
-          <td><span class="rs rs-pend" data-wid="w5" data-phase="2">예정</span></td>
+          <td>sessions.csv → 광준 전달, Random Forest 베이스라인 학습 시작, Flask 대시보드 개발 착수</td>
+          <td><span class="rs rs-done" data-wid="w5" data-phase="2">완료</span></td>
         </tr>
         <tr>
-          <td class="wn">6주</td><td style="font-family:var(--mono);font-size:11px;color:var(--muted)">3/8~3/14</td>
+          <td class="wn">6주</td><td style="font-family:var(--mono);font-size:11px;color:var(--muted)">3/15~3/21</td>
           <td><span class="phc ph2">Phase 2</span></td>
           <td><div class="pills"><span class="pill pa">A</span><span class="pill pb2">B</span><span class="pill pc">C</span></div></td>
-          <td>XGBoost 도입, SMOTE 불균형 해결, model.pkl 서빙 테스트</td>
-          <td><span class="rs rs-pend" data-wid="w6" data-phase="2">예정</span></td>
+          <td>XGBoost 도입, 병행 학습 비교, 혼잡도 변수 유효성 조사, 2차 리비전 답변 작성</td>
+          <td><span class="rs rs-done" data-wid="w6" data-phase="2">완료</span></td>
         </tr>
-        <tr>
-          <td class="wn">7주</td><td style="font-family:var(--mono);font-size:11px;color:var(--muted)">3/15~3/21</td>
+        <tr class="wcur">
+          <td class="wn">7주 ◀</td><td style="font-family:var(--mono);font-size:11px;color:var(--wip)">3/22~3/28</td>
           <td><span class="phc ph2">Phase 2</span></td>
           <td><div class="pills"><span class="pill pb2">B</span><span class="pill pc">C</span></div></td>
           <td>탐지 엔진 통합, 전처리→예측 자동화 완성, 성능 평가 보고서</td>
-          <td><span class="rs rs-pend" data-wid="w7" data-phase="2">예정</span></td>
+          <td><span class="rs rs-cur" data-wid="w7" data-phase="2">진행중</span></td>
         </tr>
         <tr>
           <td class="wn">8주</td><td style="font-family:var(--mono);font-size:11px;color:var(--muted)">3/22~3/28</td>
@@ -468,23 +474,23 @@ header{border-bottom:1px solid var(--border);padding:28px 0 20px}
   <div class="dl">
 
     <!-- dep-id: a5 (이안 RTP PCAP 재생성) 완료 시 → 자동 완료 -->
-    <div class="di" data-dep="dep-a-c">
+    <div class="di" data-dep="dep-a-c" style="border-color:rgba(52,211,153,.2)">
       <div class="dc dca">이안 A</div><div class="darr">→</div><div class="dc dcc">현서 C</div>
       <div class="dd">
         RTP 포함 PCAP 파일 전달
-        <small id="dep-a-c-sub">sipp -mi 옵션 필요 · rtp_parser.py 실데이터 검증 대기중</small>
+        <small id="dep-a-c-sub">✅ Python Scapy 직접 생성으로 대체 — 블로커 해소됨</small>
       </div>
-      <div class="dt dt-w" id="dep-a-c-tag">⛔ 대기중</div>
+      <div class="dt dt-ok" id="dep-a-c-tag">✅ 해소됨</div>
     </div>
 
-    <!-- dep-id: a7 (대량 데이터 생성) 완료 시 → 자동 완료 -->
-    <div class="di" data-dep="dep-a-b">
-      <div class="dc dca">이안 A</div><div class="darr">→</div><div class="dc dcb">광준 B</div>
+    <!-- dep-id: 현서→광준 sessions.csv 전달 -->
+    <div class="di" data-dep="dep-c-b" style="border-color:rgba(52,211,153,.2)">
+      <div class="dc dcc">현서 C</div><div class="darr">→</div><div class="dc dcb">광준 B</div>
       <div class="dd">
-        대량 PCAP → CSV 변환 후 실제 학습 데이터 전달
-        <small id="dep-a-b-sub">현재 더미 100개로 ML 구조 설계 중</small>
+        Ver.1 학습 데이터 전달 완료
+        <small id="dep-a-b-sub">sessions.csv (8,000세션) 구글 드라이브 공유 완료 — 광준 Ver.1/Ver.2 병행 학습 진행 중</small>
       </div>
-      <div class="dt dt-w" id="dep-a-b-tag">⛔ 대기중</div>
+      <div class="dt dt-ok" id="dep-a-b-tag">✅ 완료</div>
     </div>
 
     <!-- dep-id: b9 (model.pkl 전달) 완료 시 → 자동 완료 -->
@@ -520,20 +526,23 @@ header{border-bottom:1px solid var(--border);padding:28px 0 20px}
   </div>
 
   <div class="panel" style="margin-top:20px">
-    <div class="ptitle">팀원별 다음 액션</div>
+    <div class="ptitle">팀원별 다음 액션 <span style="font-size:9px;color:var(--muted);margin-left:8px">3/19 회의 기준</span></div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
       <div>
-        <div style="font-family:var(--mono);font-size:10px;color:var(--a);margin-bottom:8px">이안 (A) — 최우선</div>
-        <code style="font-family:var(--mono);font-size:11px;background:var(--s2);padding:8px 12px;border-radius:8px;display:block;color:var(--text);line-height:2">sudo sipp -sn uac ...<br><span style="color:var(--wip)">  -mi 10000-20000</span><br>→ RTP PCAP 생성</code>
+        <div style="font-family:var(--mono);font-size:10px;color:var(--a);margin-bottom:8px">이안 (A) — 진행중</div>
+        <code style="font-family:var(--mono);font-size:11px;background:var(--s2);padding:8px 12px;border-radius:8px;display:block;color:var(--text);line-height:2">PCAP → CSV 변환 완료<br><span style="color:var(--wip)">→ 광준에게 전달</span><br>혼잡도 변수 유효성 조사</code>
       </div>
       <div>
-        <div style="font-family:var(--mono);font-size:10px;color:var(--b);margin-bottom:8px">광준 (B) — 즉시 가능</div>
-        <code style="font-family:var(--mono);font-size:11px;background:var(--s2);padding:8px 12px;border-radius:8px;display:block;color:var(--text);line-height:2">git pull origin feature/parser<br>python generate_dummy.py<br>→ ML 훈련 시작</code>
+        <div style="font-family:var(--mono);font-size:10px;color:var(--b);margin-bottom:8px">광준 (B) — 진행중</div>
+        <code style="font-family:var(--mono);font-size:11px;background:var(--s2);padding:8px 12px;border-radius:8px;display:block;color:var(--text);line-height:2">이안 CSV + 현서 CSV<br><span style="color:var(--wip)">병행 ML 학습</span><br>리비전 답변 작성</code>
       </div>
       <div>
-        <div style="font-family:var(--mono);font-size:10px;color:var(--c);margin-bottom:8px">현서 (C) — 대기중</div>
-        <code style="font-family:var(--mono);font-size:11px;background:var(--s2);padding:8px 12px;border-radius:8px;display:block;color:var(--text);line-height:2">이안님 PCAP 도착 시:<br>POST /api/upload-pcap<br>→ 자동 파싱 + DB 저장</code>
+        <div style="font-family:var(--mono);font-size:10px;color:var(--c);margin-bottom:8px">현서 (C) — 진행중</div>
+        <code style="font-family:var(--mono);font-size:11px;background:var(--s2);padding:8px 12px;border-radius:8px;display:block;color:var(--text);line-height:2">리비전 답변 작성 담당<br><span style="color:var(--wip)">혼잡도 유효성 조사</span><br>model.pkl 연동 대기</code>
       </div>
+    </div>
+    <div style="margin-top:16px;padding:10px 14px;background:rgba(248,113,113,.04);border-radius:8px;border:1px solid rgba(248,113,113,.15);font-size:12px;color:var(--muted)">
+      <span style="font-family:var(--mono);font-size:10px;color:var(--block);margin-right:8px">공지</span>이상숙 장학생 — 고도화 미참여 (새 프로젝트로 진행)
     </div>
   </div>
 </div>
@@ -561,7 +570,7 @@ const DEP_MAP = {
   'dep-a-c': {
     triggerIds: ['a5'],          // 이 태스크 중 하나라도 done이면
     doneText:  'RTP PCAP 전달 완료 — 파서 실데이터 검증 가능',
-    waitText:  'sipp -mi 옵션 필요 · rtp_parser.py 실데이터 검증 대기중',
+    waitText:  'RTP PCAP 생성 대기중 · rtp_parser.py 실데이터 검증 예정',
   },
   // 이안 a7(대량 데이터 생성) 완료 → 이안→광준 행 완료
   'dep-a-b': {
@@ -649,8 +658,8 @@ function updateOverview() {
     if (el.classList.contains('rs-done')) doneW++;
   });
 
-  // 전체 진행률 (16주 기준: 완료주차/10 * 100, 16주 환산)
-  const ovPct = totalW > 0 ? Math.round((doneW / 10) * 100 * (10/16)) : 0;
+  // 전체 진행률 (10주 기준)
+  const ovPct = totalW > 0 ? Math.round(doneW / 10 * 100) : 0;
   // 각 Phase %
   function phasePct(p) {
     return ph[p].total > 0 ? Math.round((ph[p].done / ph[p].total) * 100) : 0;
@@ -668,7 +677,7 @@ function updateOverview() {
   const ovPctEl = document.getElementById('ov-pct');
   const prevPct = ovPctEl.textContent;
   ovPctEl.textContent = ovPct + '%';
-  document.getElementById('ov-week').textContent = `${doneW}주차 완료 / 총 16주`;
+  document.getElementById('ov-week').textContent = `${doneW}주차 완료 / 총 10주`;
   document.getElementById('ov-done').textContent = doneW;
 
   // Phase 레이블
