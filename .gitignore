@@ -8,11 +8,21 @@ env/
 .vscode/
 *.swp
 
-# 데이터 및 모델 파일 (대용량 및 보안)
+# 대용량 파일
 *.pcap
-*.csv
-# *.pkl
 data/raw/
+
+# 런타임 생성 파일
+database.db
+*.log
+data/uploads/
+
+# Claude Code 워크트리
+.claude/
+
+# 백업 파일
+*.bak
+*_backup.py
 
 # 파이썬 캐시
 __pycache__/

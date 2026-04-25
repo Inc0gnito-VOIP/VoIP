@@ -106,6 +106,9 @@ VoIP/
 ├── test_sender.py           # 테스트 데이터 생성기 (Hard Examples)
 ├── train.py                 # RF + XGB + Voting 앙상블 학습
 ├── eval_test.py             # 테스트 데이터 평가
+├── rtp_parser.py            # 피처 추출기 (독립 실행 버전)
+├── ablation.py              # Ablation Study (피처 기여도 분석)
+├── setup.sh                 # 네트워크 시뮬레이션 환경 설정 스크립트
 ├── docs/index.html          # GitHub Pages 현황판
 └── requirements.txt
 ```
