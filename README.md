@@ -16,7 +16,7 @@ SIM Box는 국제전화를 VoIP로 수신한 뒤 현지 SIM 카드를 통해 국
 
 | 모듈 | 설명 |
 |------|------|
-| **The Generator** | Python Scapy로 정상/SIM Box RTP 패킷을 직접 생성. Linux Network Namespaces + veth pair로 격리된 네트워크 환경 구현 |
+| **The Generator** | Python socket으로 RTP 패킷을 직접 생성·전송. Linux Network Namespaces + veth pair + tc-netem으로 격리된 네트워크 환경 구현 |
 | **The Sniffer** | `rtp_parser.py` — PCAP에서 세션별 6개 피처 추출 (RFC 3550 지터, 시퀀스 갭, 코덱 변경 등) |
 | **The Brain** | Random Forest + XGBoost + VotingClassifier(Soft Voting) 앙상블. Hard Examples 테스트로 현실적 평가 |
 | **The Dashboard** | Flask 기반 실시간 관제 대시보드. PCAP 업로드 → 자동 분석 → RF/XGB/Ensemble 3모델 비교 |
@@ -83,12 +83,13 @@ SIM Box는 국제전화를 VoIP로 수신한 뒤 현지 SIM 카드를 통해 국
 | 분야 | 기술 |
 |------|------|
 | 언어 | Python 3.8+ |
-| 패킷 생성/파싱 | Scapy |
+| 패킷 생성 | Python socket (sender.py) |
+| 패킷 파싱 | Scapy (rtp_parser.py) |
 | 데이터 처리 | Pandas, NumPy |
 | ML 모델 | scikit-learn (Random Forest), XGBoost, VotingClassifier |
 | 웹 서버 | Flask + REST API |
 | DB | SQLite |
-| 시뮬레이션 | Linux Network Namespaces + veth pair (VirtualBox VM) |
+| 시뮬레이션 | Linux Network Namespaces + veth pair + tc-netem (VirtualBox VM) |
 | 예산 | 0원 (CPU 기반, GPU 불필요) |
 
 ## 프로젝트 구조
